@@ -1,0 +1,23 @@
+npm init -y  (init npm with default config of package.json)
+
+
+// To start server after every change in the code
+>>npm start
+>>node server.js
+
+//No need to repeat those 2 commands if we use nodemon package
+//To install
+>>npm i -D nodemon
+
+//Then change the scripts section in package.json.make start attribute to "nodemon server.js"
+
+//start nodemon server
+>>nodemon server.js
+//or use
+>>npm start
+
+
+
+*******
+To bring back the node modules
+>> npm i    
