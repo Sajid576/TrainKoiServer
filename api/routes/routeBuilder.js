@@ -1,8 +1,11 @@
-const express=require('express');
-const router=express.Router();
+const express = require('express');
+const router  = express.Router();
+
+require('../model/readData');
+
+
 
 //Get
-
 router.get('/',(req,res,next)=>{
 
     res.status(200).json({
@@ -11,7 +14,6 @@ router.get('/',(req,res,next)=>{
 })
 
 //Get
-
 router.get('/:id',(req,res,next)=>{
 
     res.status(200).json({
