@@ -1,9 +1,33 @@
-# Creating a RESTful API with Node.js
-This repository used for building a RESTful API for TranKoi server side with Node.js:
+###TrainKoi Api 
 
-The tutorial that is used to build this is given below:
-1) https://www.youtube.com/watch?v=oS-xXqkrb2w&list=PL_XxuZqN0xVCeyQE1bi8dQHaITIT0FbsM&index=6 (Bangla tutorial)
-2) https://www.youtube.com/playlist?list=PL55RiY5tL51q4D-B63KBnygU6opNPFk_q  (English)
-3) https://www.toptal.com/nodejs/secure-rest-api-in-nodejs (Useful website for getting code reference)
+
+##Authentication API :
+
+SignUp Request (User data store request) : 
+authenticationApi/users  POST  newUser
+
+EditUserData request:
+authenticationApi/users/edit/:data  PUT  editedData
+
+Particular User data fetch request:
+authenticationApi/users/read/:data  GET
+     
+
+##Transaction API :
+
+changeCoinValue Request:(increament/decreament)
+transactionApi/users/id  PUT  changeCoinVal
+
+
+##RailwayRouteMaker API :
+DrawRailwayTracks Request:(this request is made for drawing black lines on the google map)
+routeBuilderApi/  GET
+DrawRoute Request:(this request is for generating path on google map)
+routeBuilderApi/:data  GET	
+(data=train name,destination/starting station)
+
+
+
+
 
 
