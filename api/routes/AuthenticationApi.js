@@ -5,7 +5,7 @@ const userDataController=require('../controller/userDataController');
 
 
 //store user data
-router.post('/users/:data',userDataController.storeUserDataController)
+router.post('/users',userDataController.storeUserDataController)
 
 //edit user data
 router.put('/users/edit/:data',userDataController.editUserDataController)

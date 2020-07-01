@@ -21,3 +21,6 @@ npm init -y  (init npm with default config of package.json)
 *******
 To bring back the node modules
 >> npm i    
+
+//Morgan is basically a logger, on any requests being made,it generates logs automatically.
+npm install -D morgan
