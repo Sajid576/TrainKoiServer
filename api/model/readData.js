@@ -148,7 +148,7 @@ function readStationToCoordinate()
 
 
 
-readAllNodeToCoordinateData();
-readNodeToNodeDistance();
-readNodeToStation();
-readStationToCoordinate();
+//readAllNodeToCoordinateData();
+//readNodeToNodeDistance();
+//readNodeToStation();
+//readStationToCoordinate();

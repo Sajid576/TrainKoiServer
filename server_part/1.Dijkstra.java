@@ -9,7 +9,8 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
-class Vertex implements Comparable<Vertex> {
+class Vertex implements Comparable<Vertex> 
+{
 
     private String name;
     private List<Edge> adjacenciesList;
@@ -320,7 +321,7 @@ public class Dijkstra {
         addUndirectedNeighbour(120,121,2.95);
         addUndirectedNeighbour(121,122,6.56);
 
-
+        
 
         Line obj=new Line();
 

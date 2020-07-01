@@ -2,9 +2,14 @@ const http = require('http');
 const app = require('./app');
 
 
-const TrainRouteBuilder=require('./api/routes/routeBuilder');
+const TrainRouteBuilderApi=require('./api/routes/routeBuilderApi');
+const AuthenticationApi=require('./api/routes/AuthenticationApi');
+const TransactionApi=require('./api/routes/TransactionApi');
 
-app.use('/api/routeBuilder',TrainRouteBuilder);
+app.use('/routeBuilderApi',TrainRouteBuilderApi);
+app.use('/authenticationApi',AuthenticationApi);
+app.use('/transactionApi',TransactionApi);
+
 
 const port = process.env.PORT || 3000;
 

@@ -193,8 +193,11 @@ public class Line extends MapsActivity{
     }
 
 
-
-
+    *****ERROR****
+    //There is a big mistake while calculating first_portion_distance
+    //& last_portion_distance bcz there is no logic that defines that
+    // first_portion_list will between Train Node (0) & node1. 
+    //same goes for node2 also. 
 
     public DistanceCost getTotal_Cost(ArrayList<LatLng>coordinates_list,int TrainIndex,int node1,int node2)
     {
