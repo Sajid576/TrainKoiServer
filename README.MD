@@ -1,7 +1,7 @@
-###TrainKoi Api 
+# TrainKoi Api 
 
 
-##Authentication API :
+# Authentication API :
 
 SignUp Request (User data store request) : 
 authenticationApi/users  POST  newUser
@@ -13,13 +13,13 @@ Particular User data fetch request:
 authenticationApi/users/read/:data  GET
      
 
-##Transaction API :
+# Transaction API :
 
 changeCoinValue Request:(increament/decreament)
 transactionApi/users/id  PUT  changeCoinVal
 
 
-##RailwayRouteMaker API :
+# RailwayRouteMaker API :
 DrawRailwayTracks Request:(this request is made for drawing black lines on the google map)
 routeBuilderApi/  GET
 DrawRoute Request:(this request is for generating path on google map)
