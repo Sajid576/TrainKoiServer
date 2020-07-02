@@ -12,6 +12,8 @@ drawRailwayTracksController =(req,res,next)=>{
 
 //this GET request is for generating path on google map
 drawRouteController =(req,res,next)=>{
+    console.log(req.params.trainName)
+    console.log(req.params.stationName)
 
     res.status(201).json({
         message:'Getting a list of coordinates',

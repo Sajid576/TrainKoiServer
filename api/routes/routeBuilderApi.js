@@ -9,7 +9,7 @@ const routeBuilderController=require('../controller/routeBuilderController');
 router.get('/',routeBuilderController.drawRailwayTracksController)
 
 //this GET request is for generating path on google map
-router.get('/:data',routeBuilderController.drawRouteController)
+router.get('/:trainName/:stationName',routeBuilderController.drawRouteController)
 
 
 module.exports=router;
