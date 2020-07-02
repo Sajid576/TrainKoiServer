@@ -23,4 +23,11 @@ To bring back the node modules
 >> npm i    
 
 //Morgan is basically a logger, on any requests being made,it generates logs automatically.
-npm install -D morgan
+>>npm install -D morgan
+
+//Node.js body parsing middleware.
+
+//Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+>>npm install body-parser
+
+

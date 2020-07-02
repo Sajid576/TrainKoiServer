@@ -1,8 +1,12 @@
 const http = require('http');
 const express = require('express');
 const app = express();
+
 var morgan = require('morgan')
 app.use(morgan('dev'))
+
+//this is used for parsing the body data from request
+app.use(express.json());
 
 app.get('/',(req,res)=>{
     res.send("Welcome to the TrainKoi")

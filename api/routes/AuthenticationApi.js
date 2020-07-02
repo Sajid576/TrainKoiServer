@@ -8,9 +8,9 @@ const userDataController=require('../controller/userDataController');
 router.post('/users',userDataController.storeUserDataController)
 
 //edit user data
-router.put('/users/edit/:data',userDataController.editUserDataController)
+router.put('/users/edit',userDataController.editUserDataController)
 
 //read user data
-router.get('/users/read/:data',userDataController.readUserDataController)
+router.get('/users/read/:id',userDataController.readUserDataController)
 
 module.exports=router;
