@@ -1,59 +1,74 @@
-require('../model/readData');
+const AuthenticationModel = require('../model/AuthenticationModel');
 
-usersMap={
-    '123':{
-        'name':'sajid',
-        'email':'sajid@gmail.com',
-        'phone':'01535155114'
-    },
-    '456':{
-        'name':'rain',
-        'email':'rain@gmail.com',
-        'phone':'0153123123'
-    }
-}
+
 
 //POST: store user data
 storeUserDataController =(req,res,next)=>{
-    console.log(req.body.username)
-    console.log(req.body.email)
-    console.log(req.body.phone)
+    const uid=req.body.uid
+    const username=req.body.username
+    const email=req.body.email
+    const phone=req.body.phone
 
+    AuthenticationModel.storeUserData(uid,username,email,phone).then(()=>{
+        res.status(200).json({
+            message:'User data successfully saved',
+            username:username,
+            email:email,
+            phone:phone,
+        })
+    }).catch(error => {
+        console.error(error)
+        res.status(404).json({
+            message:'Data could not be stored due to  '+error.message,
+           
+        })
+    });
 
-    res.status(200).json({
-        message:'User data successfully saved',
-        username:req.body.username,
-        email:req.body.email,
-        phone:req.body.phone
-    })
+    
 }
 
 //PUT: edit user data
 editUserDataController =(req,res,next)=>{
-    console.log(req.body.username)
-    console.log(req.body.email)
-    console.log(req.body.phone)
-    res.status(201).json({
-        message:'User data successfully edited',
-        username:req.body.username,
-        email:req.body.email,
-        phone:req.body.phone
-    })
+    const uid=req.body.uid
+    const username=req.body.username
+    const phone=req.body.phone
+   
+    AuthenticationModel.editUserData(uid,username,phone).then(()=>{
+        res.status(200).json({
+            message:'User data successfully edited',
+            username:username,
+            phone:phone,
+        })
+    }).catch(error => {
+        console.error(error)
+        res.status(404).json({
+            message:'Data could not be saved due to  '+error.message,
+           
+        })
+    });
 }
 
 //GET: read a particular user data
 readUserDataController =(req,res,next)=>{
     const uid=req.params.id;
     
-    data=usersMap[uid];
-    if(data==null)
-        data='NULL';
-    console.log(data);
-    res.status(202).json({
-        message:'User data read successfully',
-        userInfo:data
-
+    
+    AuthenticationModel.readUserData(uid).then(user=>{
+        res.status(202).json({
+            message:'User data read successfully',
+            username:user['username'],
+            email:user['email'],
+            phone:user['phone']
+        })
+    }).catch(error=>{
+        console.log(error.message);
+        res.status(404).json({
+            message:'User data failed to read from server',
+            
+        })
     })
+    
+   
 }
 
 
