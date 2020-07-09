@@ -1,14 +1,3 @@
-package com.example.trainkoi.GoogleMap_Activities;
-
-import android.location.Address;
-
-import com.example.trainkoi.Page3_Activity;
-import com.google.android.gms.maps.model.LatLng;
-
-import java.util.*;
-import java.util.ArrayList;
-import java.util.List;
-
 class Vertex implements Comparable<Vertex> 
 {
 
@@ -333,8 +322,8 @@ public class Dijkstra {
         DistanceCost cost=obj.getTotal_Cost(res.getTemp_list(),res.getTrainIndex(),res.getNode1(),res.getNode2());
         int node1=cost.getNode1();
         int node2=cost.getNode2();
-       // double costFromFirstNode=distanceBetweenIndexAndFirstNode();
-       // double costFromSecondNode=total_cost-costFromFirstNode;
+     // double costFromFirstNode=distanceBetweenIndexAndFirstNode();
+    //  double costFromSecondNode=total_cost-costFromFirstNode;
 
         addUndirectedNeighbour(0,cost.getNode1(),cost.getFirst_portion_distance());
         addUndirectedNeighbour(0,cost.getNode2(),cost.getLast_portion_distance());

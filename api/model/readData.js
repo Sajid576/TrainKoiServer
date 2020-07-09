@@ -2,17 +2,20 @@
 var firebase = require('./FirebaseConnection');
 
 
-//this String to list map keep all the lists of coordinates
-var nodesToCoordinatesMap = new Map();      //string to list
+//this variable to list map keep all the lists of coordinates
+var nodesToCoordinatesMap = new Map();      
+
 
 //this variable store all the node to distance mapping value
-var _nodeToDistance;
+var nodeTonodeDistance=new Map();
 
 //this variable store all the node to station mapping value
-var _nodeTostation;
+var nodeTostation;
 
 //this variable store all the station to coordinate mapping value
-var _StationToCoordinate;
+var StationToCoordinate;
+
+
 
 
  //this function fetches all lists of coordinates 
@@ -67,12 +70,13 @@ function readNodeToNodeDistance()
     .then(nodeToDistance => {
       if(nodeToDistance.exists)
         {
-            _nodeToDistance=nodeToDistance.data();
+           nodeTonodeDistance=nodeToDistance.data();
 
-            const Mp = new Map(Object.entries(_nodeToDistance));
-
+           nodeTonodeDistance = new Map(Object.entries(nodeTonodeDistance));
+           
+          
             //printing the map for checking
-            for (let [key, value] of Mp) 
+            for (let [key, value] of nodeTonodeDistance) 
             {
                   console.log(key + ' = ' + value)
             }
@@ -98,9 +102,9 @@ function readNodeToStation()
     .then(nodeTostation => {
       if(nodeTostation.exists)
         {
-            _nodeTostation=nodeTostation.data();
+            nodeTostation=nodeTostation.data();
 
-            const Mp = new Map(Object.entries(_nodeTostation));
+            const Mp = new Map(Object.entries(nodeTostation));
 
             //printing the map for checking
             for (let [key, value] of Mp) 
@@ -127,9 +131,9 @@ function readStationToCoordinate()
     .then(StationToCoordinate => {
       if(StationToCoordinate.exists)
         {
-            _StationToCoordinate=StationToCoordinate.data();
+            StationToCoordinate=StationToCoordinate.data();
            
-            const Mp = new Map(Object.entries(_StationToCoordinate));
+            const Mp = new Map(Object.entries(StationToCoordinate));
 
             //printing the map for checking
             for (let [key, value] of Mp) 
@@ -148,7 +152,32 @@ function readStationToCoordinate()
 
 
 
+  
+  
 //readAllNodeToCoordinateData();
-//readNodeToNodeDistance();
+readNodeToNodeDistance();
 //readNodeToStation();
 //readStationToCoordinate();
+
+function fetchNodesToCoordinatesMap()
+{
+    return nodesToCoordinatesMap;
+}
+function fetchNodeTonodeDistance()
+{
+    return nodeTonodeDistance;
+}
+function fetchNodeTostation()
+{
+    return nodeTostation;
+}
+function fetchStationToCoordinate()
+{
+    return StationToCoordinate;
+}
+module.exports={
+  fetchNodesToCoordinatesMap,
+  fetchNodeTonodeDistance,
+  fetchNodeTostation,
+  fetchStationToCoordinate
+}

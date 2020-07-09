@@ -15,16 +15,20 @@ app.get('/',(req,res)=>{
 const TrainRouteBuilderApi=require('./api/routes/routeBuilderApi');
 const AuthenticationApi=require('./api/routes/AuthenticationApi');
 const TransactionApi=require('./api/routes/TransactionApi');
-
+const locationTrackingApi=require('./api/routes/locationTrackingApi');
 
 
 app.use('/authenticationApi',AuthenticationApi);
 app.use('/routeBuilderApi',TrainRouteBuilderApi);
 app.use('/transactionApi',TransactionApi);
+app.use('/locationTrackingApi',locationTrackingApi);
 
 const port = process.env.PORT || 3000;
 
 const server = http.createServer(app);
 
-server.listen(port);
+server.listen(port,()=>{
+    console.log("Server listening on port: "+port);
+    
+});
 
