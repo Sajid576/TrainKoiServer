@@ -4,6 +4,9 @@ class Graph{
     nodes=[];
     edges=new Map();
 
+    path=[];
+    total_distances;
+
     constructor(nodeTonodeDistance)
     {
         for(var i=0;i<10;i++)
@@ -43,16 +46,37 @@ class Graph{
                 console.log(key+"--"+JSON.stringify(value))
             }
         }
-        var distances=this.djikstraAlgorithm("1");
-        console.log("Shortest distances are: ")
-        console.log(JSON.stringify(distances))
+        //set adjacent among '0' no. node with its nearest two nodes
+        
+
+
+        this.djikstraAlgorithm("1","4");
+       
+        //console.log("Shortest distances are: ")
+        //console.log(JSON.stringify(distances))
+    }
+    setDestinationDistance(distances,destinationNode)
+    {
+        this.total_distances= distances[destinationNode];//set the distance in KM
+    }
+    setDestinationPath(prev,i)
+    {
+        
+        if(prev[i]==-1)
+        { 
+            this.path.push(i);
+            return ;
+        }
+        this.setDestinationPath(prev,prev[i]);
+        this.path.push(i);
+
     }
     addNode(node)
     {
         this.nodes.push(node);
     }
 
-    djikstraAlgorithm(startNode) {
+    djikstraAlgorithm(startNode,destinationNode) {
         let distances = {};
      
         // Stores the reference to previous nodes
@@ -84,7 +108,11 @@ class Graph{
               }
            });
         }
-        return distances;
+
+        this.setDestinationDistance(distances,destinationNode);
+        this.setDestinationPath(prev,destinationNode);
+        console.log(total_distances)
+        console.log(JSON.stringify(path));
      }
 
 

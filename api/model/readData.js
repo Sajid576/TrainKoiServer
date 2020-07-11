@@ -11,11 +11,12 @@ var nodeTonodeDistance=new Map();
 
 //this variable store all the node to station mapping value
 var nodeTostation;
+var stationToNode={};
 
 //this variable store all the station to coordinate mapping value
 var StationToCoordinate;
 
-
+var CoordinateToStation=new Map();
 
 
  //this function fetches all lists of coordinates 
@@ -110,6 +111,7 @@ function readNodeToStation()
             for (let [key, value] of Mp) 
             {
                   console.log(key + ' = ' + value)
+                  stationToNode[value]=key
             }
            
         }
@@ -139,6 +141,7 @@ function readStationToCoordinate()
             for (let [key, value] of Mp) 
             {
                   console.log(key + ' = ' + value)
+                  CoordinateToStation.set(value,key);
             }
         }
 
@@ -156,8 +159,8 @@ function readStationToCoordinate()
   
 //readAllNodeToCoordinateData();
 readNodeToNodeDistance();
-//readNodeToStation();
-//readStationToCoordinate();
+readNodeToStation();
+readStationToCoordinate();
 
 function fetchNodesToCoordinatesMap()
 {
@@ -167,17 +170,27 @@ function fetchNodeTonodeDistance()
 {
     return nodeTonodeDistance;
 }
-function fetchNodeTostation()
+function fetchNodeTostation(node)
 {
-    return nodeTostation;
+    return nodeTostation[node];   //returns station name
+}
+function fetchstationToNode(stationName)
+{
+    return stationToNode[stationName];     //returns node
 }
 function fetchStationToCoordinate()
 {
     return StationToCoordinate;
 }
+function fetchCoordinateToStation()
+{
+    return CoordinateToStation;
+}
 module.exports={
   fetchNodesToCoordinatesMap,
   fetchNodeTonodeDistance,
   fetchNodeTostation,
-  fetchStationToCoordinate
+  fetchstationToNode,
+  fetchStationToCoordinate,
+  fetchCoordinateToStation
 }

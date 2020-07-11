@@ -2,7 +2,7 @@ const dijkstra = require('../model/dijkstra');
 
 myDatabase=require('../model/readData');
 locationData=require('../model/TrainLocationData');
-
+snapToRailway=require('../model/snapToRailway');
 
 //Get request for drawing black lines on the google map
 drawRailwayTracksController =(req,res,next)=>{
@@ -38,7 +38,9 @@ drawRouteController =(req,res,next)=>{
     {
         var trainData= locationData.fetchTrainLoction(trainName);
         //console.log(myDatabase.fetchNodeTonodeDistance())
-        var graph=new dijkstra.Graph(myDatabase.fetchNodeTonodeDistance());
+        
+        destinationNode= myDatabase.fetchstationToNode(stationName);
+        var graph=new dijkstra.Graph(myDatabase.fetchNodeTonodeDistance(),destinationNode,);
 
         res.status(200).json({
             message:'Getting the data of the requested train',

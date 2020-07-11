@@ -112,8 +112,8 @@ public class Line extends MapsActivity{
          int node2=list_nodes.get(1);
          int node3=list_nodes.get(2);   
        
-        
-         //database fetch part
+
+        //database fetch part
         ArrayList<LatLng>list1=getList(node1,node2);
         ArrayList<LatLng>list2=getList(node2,node3);
         
