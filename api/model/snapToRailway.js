@@ -3,6 +3,38 @@ priorityqueue=require('./PriorityQueue');
 haversine=require('./Haversine');
 preprocess=require('./Preprocess');
 
+module.exports={
+    nearestNodesFinder,
+    convertPathToCoordinateList
+}
+
+function convertPathToCoordinateList(path,nearestList)
+{
+    coordinatesMap=myDb.fetchNodesToCoordinatesMap();
+
+
+    mainlist=[];
+    mainlist.push.apply(mainlist,nearestList);
+
+    for(var i=1;i<path.length-1;i++)
+    {
+        var edge=path[i]+","+path[i+1];
+        var Rev_edge=path[i+1]+","+path[i];
+        if(coordinatesMap.has(edge))
+        {
+            var temp_list= coordinatesMap.get(edge);
+            mainlist.push.apply(mainlist,temp_list);
+        }
+        else{
+            var temp_list= coordinatesMap.get(Rev_edge);
+            mainlist.push.apply(mainlist,temp_list);
+        }
+
+    }
+    return mainlist;
+
+}
+
 
 function nearestNodesFinder(x,y)
 {
@@ -55,7 +87,8 @@ function nearestNodesFinder(x,y)
     node_list.sort();
     
     
-    nearestListIndexFinder(node_list,x,y);
+    var pre=nearestListIndexFinder(node_list,x,y);
+    return pre;
 
 }
 
@@ -121,14 +154,14 @@ function nearestListIndexFinder(node_list,x,y)
 
     if(list_indicator==1)
     {    
-        preprocess.Preprocess(list1,nearest_index);
+        var pre=new preprocess.Preprocess(list1,nearest_index);
     }
     else
     {
-        preprocess.Preprocess(list2,nearest_index)
+        var pre= new preprocess.Preprocess(list2,nearest_index)
     }
 
-    
+    return pre;
 
 
 

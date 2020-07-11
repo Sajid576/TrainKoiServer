@@ -7,7 +7,7 @@ class Graph{
     path=[];
     total_distances;
 
-    constructor(nodeTonodeDistance)
+    constructor(nodeTonodeDistance,preprocess)
     {
         for(var i=0;i<10;i++)
         {
@@ -15,46 +15,59 @@ class Graph{
             this.edges.set(String(i),[])
         }
         console.log("lol:     "+this.edges.size);
-        //console.log("adjacency length:  "+this.nodes.length);
-       
-
-        //printing the map for checking
+      
         for (let [key, value] of nodeTonodeDistance) 
         {
             var str=key.split(',');
             var start=str[0];
             var end=str[1];
             
-            var temp={
-                weight:Number(value),
-                node:end
-            }
-               
-            var temp1={
-                 weight:Number(value),
-                node:start
-             }
-            var temp_list=this.edges.get(start)
-            temp_list.push(temp)
-            this.edges.set(start,temp_list)
-            var temp_list1=this.edges.get(end)
-            temp_list1.push(temp1)
-            this.edges.set(end,temp_list1)
-                        
-            for (let [key, value] of this.edges) 
-            {
-                console.log(key+"--"+JSON.stringify(value))
-            }
+            setBidirectedAdjacent(start,end,value);   
         }
         //set adjacent among '0' no. node with its nearest two nodes
         
+        setBidirectedAdjacent(0,preprocess.getNode1(),preprocess.getFirstPortionDistance());
+        setBidirectedAdjacent(0,preprocess.getNode2(),preprocess.getLastPortionDistance());
 
-
-        this.djikstraAlgorithm("1","4");
        
-        //console.log("Shortest distances are: ")
-        //console.log(JSON.stringify(distances))
+        for (let [key, value] of this.edges) 
+        {
+            console.log(key+"--"+JSON.stringify(value))
+        }
     }
+    //this method used build the realtime bidirected adjacency list 
+    setBidirectedAdjacent(u,v,wt)
+    {
+        var temp={
+            weight:Number(wt),
+            node:v
+        }
+
+        var temp_list=this.edges.get(u);
+        temp_list.push(temp);
+        this.edges.set(u,temp_list);
+
+        var temp1={
+            weight:Number(wt),
+            node:u
+        }
+
+        var temp_list1=this.edges.get(v);
+        temp_list1.push(temp1);
+        this.edges.set(v,temp_list1);
+
+    }
+    //this method returns the computed shortest distance in KM
+    getShortestDistance()
+    {
+        return this.total_distances;
+    }
+    //this method returns the computed shortest path 
+    getShortestPath()
+    {
+        return this.path;
+    }
+
     setDestinationDistance(distances,destinationNode)
     {
         this.total_distances= distances[destinationNode];//set the distance in KM
@@ -71,12 +84,13 @@ class Graph{
         this.path.push(i);
 
     }
+
     addNode(node)
     {
         this.nodes.push(node);
     }
 
-    djikstraAlgorithm(startNode,destinationNode) {
+    initDjikstraAlgorithm(startNode,destinationNode) {
         let distances = {};
      
         // Stores the reference to previous nodes
