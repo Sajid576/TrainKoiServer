@@ -16,12 +16,14 @@ const TrainRouteBuilderApi=require('./api/routes/routeBuilderApi');
 const AuthenticationApi=require('./api/routes/AuthenticationApi');
 const TransactionApi=require('./api/routes/TransactionApi');
 const locationTrackingApi=require('./api/routes/locationTrackingApi');
-
+const databaseBuilderApi=require('./api/routes/DatabaseBuilderApi')
 
 app.use('/authenticationApi',AuthenticationApi);
 app.use('/routeBuilderApi',TrainRouteBuilderApi);
 app.use('/transactionApi',TransactionApi);
 app.use('/locationTrackingApi',locationTrackingApi);
+
+app.use('/databaseBuilderApi',databaseBuilderApi);
 
 const port = process.env.PORT || 3000;
 

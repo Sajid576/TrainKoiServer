@@ -158,9 +158,9 @@ function readStationToCoordinate()
   
   
 //readAllNodeToCoordinateData();
-readNodeToNodeDistance();
-readNodeToStation();
-readStationToCoordinate();
+//readNodeToNodeDistance();
+//readNodeToStation();
+//readStationToCoordinate();
 
 function fetchNodesToCoordinatesMap()
 {

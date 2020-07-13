@@ -1,4 +1,7 @@
  
+var firebase = require('./FirebaseConnection');
+
+ 
  //this function will be used to store nodePair mapping with coordinateList
  function storeNodeToCoordinateData(nodePair,coordinateList)
  {
@@ -67,3 +70,10 @@ function storeStationToCoordinateData(stationName,geo)
         console.error(error)
     });
 }
+
+module.exports={
+    storeNodeToCoordinateData,
+    storeNodeToNodeDistanceData,
+    storeNodeToStationData,
+    storeStationToCoordinateData
+ }
