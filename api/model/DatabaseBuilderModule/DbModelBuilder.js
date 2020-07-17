@@ -1,5 +1,6 @@
 var fs = require('fs');
 math=require('./Math');
+haversine=require('../Haversine');
 
 var getAllFilesFromFolder = function(dir) {
 
@@ -109,18 +110,71 @@ function readFiles(files)
         }
     });
     //console.log(station_junction_list)
-    console.log(nodeToCoordinateTracker);
-    
-    
+    //console.log(nodeToCoordinateTracker);
+    //generateCoordinates(nodeToCoordinateTracker);
+    generateDistance(nodeToCoordinateTracker);
 
+}
 
+function generateCoordinates(nodeToCoordinateTracker)
+{
+    //this map will hold the generated coordinates
+    var nodeToGeneratedCoordinateMap=new Map();
 
+    for (let [key, value] of nodeToCoordinateTracker) 
+    {
+            //console.log(key + ' = ' + value)
+            var new_list=[];
+            new_list.push(value[0]);
+            for(var i=0;i<value.length-1;i++)
+            {
+                
+                var startLat=Number( value[i].split(',')[0]);
+                var startLon=Number( value[i].split(',')[1]);
+
+                var endLat= Number(value[i+1].split(',')[0]);
+                var endLon= Number(value[i+1].split(',')[1]);
+                var result=math.FindAllPoints(new math.Point(startLat,startLon),new math.Point(endLat,endLon),10);
+                
+                new_list.push.apply(new_list,result);
+
+            }
+            new_list.push(value[value.length-1]);
+            nodeToGeneratedCoordinateMap.set(key,new_list);
+
+    }
+
+    console.log(nodeToGeneratedCoordinateMap);
     
 
 
 }
+function generateDistance(nodeToCoordinateTracker)
+{
+    var nodeTonodeDistMap=new Map();
+    for (let [key, value] of nodeToCoordinateTracker) 
+    {
+        var total_dist=0;
+        for(var i=0;i<value.length-1;i++)
+        {
+            var startLat=Number( value[i].split(',')[0]);
+            var startLon=Number( value[i].split(',')[1]);
 
+            var endLat= Number(value[i+1].split(',')[0]);
+            var endLon= Number(value[i+1].split(',')[1]);
 
+            var dist=haversine.getDistance(startLat,startLon,endLat,endLon);//in KM
+            total_dist+=dist;
+            
+
+        }
+        total_dist=Number(total_dist.toFixed(2));
+        nodeTonodeDistMap.set(key,total_dist);
+   
+    }
+    console.log(nodeTonodeDistMap);
+
+}
 
 
 
