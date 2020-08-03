@@ -85,7 +85,7 @@ readNodeToNodeDistance()
     .then(nodeToDistance => {
       if(nodeToDistance.exists)
         {
-          ReadData.nodeTonodeDistance=nodeToDistance.data();
+          ReadData.nodeTonodeDistance=nodeToDistance.data()['nodePairTodistanceMap'];
 
           ReadData.nodeTonodeDistance = new Map(Object.entries(ReadData.nodeTonodeDistance));
             
@@ -116,7 +116,7 @@ readNodeToStation()
     .then(nodeTostation => {
       if(nodeTostation.exists)
         {
-          ReadData.nodeTostation=nodeTostation.data();
+          ReadData.nodeTostation=nodeTostation.data()['nodeToStationNameMap'];
 
           const Mp = new Map(Object.entries(ReadData.nodeTostation));
 
@@ -146,7 +146,7 @@ readStationToCoordinate()
     .then(StationToCoordinate => {
       if(StationToCoordinate.exists)
         {
-           ReadData.StationToCoordinate=StationToCoordinate.data();
+           ReadData.StationToCoordinate=StationToCoordinate.data()['stationNameToGeoData'];
            
             const Mp = new Map(Object.entries(ReadData.StationToCoordinate));
 

@@ -9,7 +9,7 @@ class DatabaseBuilder{
     {
 
         this.setNodeToCoordinateData(nodeToGeneratedCoordinateMap);
-        this.storeNodeToNodeDistanceData(nodeTonodeDistMap);
+        this.setNodeToNodeDistanceData(nodeTonodeDistMap);
         this.setNodeToStationData_AND_stationToCoordinateData(station_junction_list);
 
     }
@@ -41,6 +41,8 @@ class DatabaseBuilder{
 
     setNodeToNodeDistanceData(nodePairTodistanceMap)
     {
+        var nodePairTodistanceObj= Object.fromEntries(nodePairTodistanceMap);
+        this.storeNodeToNodeDistanceData(nodePairTodistanceObj);
 
     }
     // 1,2 : 5.5km
@@ -74,9 +76,11 @@ class DatabaseBuilder{
              StationToCoordinateMappingData.set(key,value[1]);
 
         }
+        var NodeToStationObj= Object.fromEntries(NodeToStationMappingData);
+        var StationToCoordinateObj= Object.fromEntries(StationToCoordinateMappingData);
 
-        this.storeNodeToStationData(NodeToStationMappingData);
-        this.storeStationToCoordinateData(StationToCoordinateMappingData);
+        this.storeNodeToStationData(NodeToStationObj);
+        this.storeStationToCoordinateData(StationToCoordinateObj);
     }
 
     //1 : "kamlapur"
