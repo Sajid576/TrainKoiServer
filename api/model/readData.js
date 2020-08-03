@@ -2,67 +2,81 @@
 var firebase = require('./FirebaseConnection');
 
 
-//this variable to list map keep all the lists of coordinates
-var nodesToCoordinatesMap = new Map();      
+class ReadData{
 
+static readDbData=null;
+
+//this variable to list map keep all the lists of coordinates
+static nodesToCoordinatesMap = new Map();      
 
 //this variable store all the node to distance mapping value
-var nodeTonodeDistance=new Map();
+static nodeTonodeDistance=new Map();
 
 //this variable store all the node to station mapping value
-var nodeTostation;
-var stationToNode={};
+static nodeTostation;
+static stationToNode={};
 
-//this variable store all the station to coordinate mapping value
-var StationToCoordinate;
+//this variable store all the station and junction name to coordinate mapping value
+static StationToCoordinate;
+//this variable store all the coordinate to station and junction name mapping value
+static CoordinateToStation=new Map();
 
-var CoordinateToStation=new Map();
 
+constructor()
+{
+      
+}
 
- //this function fetches all lists of coordinates 
- function readAllNodeToCoordinateData()
- {
+getSingletonReadDbDataInstance()
+{
+    if(ReadData.readDbData==null)
+    {
+      ReadData.readDbData =new ReadData();
+
+    }
+    return ReadData.readDbData;
+
+}
+//this method will fetch all required data from firestore to server variables on server startup.
+loadServerDb()
+{
+    //this.readAllNodeToCoordinateData();
+    this.readNodeToNodeDistance();
+    this.readNodeToStation();
+    this.readStationToCoordinate();
+}
+
+//this function fetches all lists of coordinates 
+readAllNodeToCoordinateData()
+{
    
    const query = firebase.firestore().collection('NodeToCoordinate').get();
 
     
    query.then(snapshot => {
-     snapshot.forEach(nodes => {
+     snapshot.forEach(nodes => 
+      {
         
-             var nodePair=nodes.id;
-             var coordList=nodes.data();
+          var nodePair=nodes.id;
+          var coordList=nodes.data();
 
-             nodesToCoordinatesMap.set(nodePair,coordList['Coordinates']);
+          ReadData.nodesToCoordinatesMap.set(nodePair,coordList['Coordinates']);
 
-
-        });
-          //printing the map for checking
-          for (let [key, value] of nodesToCoordinatesMap) 
-          {
-                  console.log(key + ' = ' + value)
-          }
-         /*
-          //printing the keys
-          for (let key of nodesToCoordinatesMap.keys()) 
-          {
-                console.log(key)
-          }
-          
-          //printing the values
-          for (let value of nodesToCoordinatesMap.values()) 
-          {
-                console.log(value)
-          }
-
-          */
-
+      });
+        //printing the map for checking
+        for (let [key, value] of ReadData.nodesToCoordinatesMap) 
+        {
+              console.log(key + ' = ' + value+"\n")
+        }
+         
+        console.log("readAllNodeToCoordinateData function called");
    })
    .catch(error => {
      console.error(error);
    });
  }
 
-function readNodeToNodeDistance()
+readNodeToNodeDistance()
 {
     const query = firebase.firestore().collection('NodeToNodeDistance').doc('distance(km)');
 
@@ -71,17 +85,18 @@ function readNodeToNodeDistance()
     .then(nodeToDistance => {
       if(nodeToDistance.exists)
         {
-           nodeTonodeDistance=nodeToDistance.data();
+          ReadData.nodeTonodeDistance=nodeToDistance.data();
 
-           nodeTonodeDistance = new Map(Object.entries(nodeTonodeDistance));
-           
-          
+          ReadData.nodeTonodeDistance = new Map(Object.entries(ReadData.nodeTonodeDistance));
+            
             //printing the map for checking
-            for (let [key, value] of nodeTonodeDistance) 
+            for (let [key, value] of ReadData.nodeTonodeDistance) 
             {
-                  console.log(key + ' = ' + value)
+                  console.log(key + ' = ' + value+"\n")
             }
            
+            console.log("readNodeToNodeDistance function called");
+
         }
 
       else{
@@ -93,27 +108,25 @@ function readNodeToNodeDistance()
       console.error(error);
     });
 }
-
-function readNodeToStation()
+readNodeToStation()
 {
     const query = firebase.firestore().collection('NodeToStation').doc('mapping');
-
-   
+  
     query.get()
     .then(nodeTostation => {
       if(nodeTostation.exists)
         {
-            nodeTostation=nodeTostation.data();
+          ReadData.nodeTostation=nodeTostation.data();
 
-            const Mp = new Map(Object.entries(nodeTostation));
+          const Mp = new Map(Object.entries(ReadData.nodeTostation));
 
             //printing the map for checking
             for (let [key, value] of Mp) 
             {
                   console.log(key + ' = ' + value)
-                  stationToNode[value]=key
+                  ReadData.stationToNode[value]=key
             }
-           
+            console.log("readNodeToStation function called");
         }
 
       else
@@ -124,7 +137,7 @@ function readNodeToStation()
     });
 }
 
-function readStationToCoordinate()
+readStationToCoordinate()
 {
     const query = firebase.firestore().collection('StationToCoordinate').doc('mapping');
 
@@ -133,16 +146,19 @@ function readStationToCoordinate()
     .then(StationToCoordinate => {
       if(StationToCoordinate.exists)
         {
-            StationToCoordinate=StationToCoordinate.data();
+           ReadData.StationToCoordinate=StationToCoordinate.data();
            
-            const Mp = new Map(Object.entries(StationToCoordinate));
+            const Mp = new Map(Object.entries(ReadData.StationToCoordinate));
 
             //printing the map for checking
             for (let [key, value] of Mp) 
             {
                   console.log(key + ' = ' + value)
-                  CoordinateToStation.set(value,key);
+                  ReadData.CoordinateToStation.set(value,key);
             }
+
+            console.log("readStationToCoordinate function called");
+
         }
 
       else
@@ -155,42 +171,33 @@ function readStationToCoordinate()
 
 
 
-  
-  
-//readAllNodeToCoordinateData();
-//readNodeToNodeDistance();
-//readNodeToStation();
-//readStationToCoordinate();
+fetchNodesToCoordinatesMap()
+{
+    return ReadData.nodesToCoordinatesMap;
+}
+fetchNodeTonodeDistance()
+{
+    return ReadData.nodeTonodeDistance;
+}
+fetchNodeTostation(node)
+{
+    return ReadData.nodeTostation[node];   //returns station name
+}
+fetchstationToNode(stationName)
+{
+    return ReadData.stationToNode[stationName];     //returns node
+}
+fetchStationToCoordinate()
+{
+    return ReadData.StationToCoordinate;
+}
+fetchCoordinateToStation()
+{
+    return ReadData.CoordinateToStation;
+}
 
-function fetchNodesToCoordinatesMap()
-{
-    return nodesToCoordinatesMap;
 }
-function fetchNodeTonodeDistance()
-{
-    return nodeTonodeDistance;
-}
-function fetchNodeTostation(node)
-{
-    return nodeTostation[node];   //returns station name
-}
-function fetchstationToNode(stationName)
-{
-    return stationToNode[stationName];     //returns node
-}
-function fetchStationToCoordinate()
-{
-    return StationToCoordinate;
-}
-function fetchCoordinateToStation()
-{
-    return CoordinateToStation;
-}
+
 module.exports={
-  fetchNodesToCoordinatesMap,
-  fetchNodeTonodeDistance,
-  fetchNodeTostation,
-  fetchstationToNode,
-  fetchStationToCoordinate,
-  fetchCoordinateToStation
+    ReadData
 }

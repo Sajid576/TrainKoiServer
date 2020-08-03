@@ -1,11 +1,14 @@
-buildDB=require('../model/DatabaseBuilderModule/DbModelBuilder');
+fileModel=require('../model/DatabaseBuilderModule/FileModel');
 
 
 buildDatabase =(req,res,next)=>{
     
-    var files= buildDB.getFileNameList();
+    var fModel= new fileModel.FileModel();
+    var files= fModel.getFileNameList();
     //console.log(files);
-    buildDB.readFiles(files);
+    fModel.readFiles(files);
+    
+    fModel.setDbModel();
     
     res.status(200).json({
         message:'database build successfully',
