@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 
 const loadServer=require('./api/model/readData');
+const loadUserData=require('./api/model/AuthenticationModel');
 
 var morgan = require('morgan')
 app.use(morgan('dev'))
@@ -34,8 +35,9 @@ const server = http.createServer(app);
 server.listen(port,()=>{
     console.log("Server listening on port: "+port);
 
-    db=new loadServer.ReadData().getSingletonReadDbDataInstance();
-    db.loadServerDb();
+    new loadUserData.AuthenticaltionModel().readUserDataFromDb();
+    //db=new loadServer.ReadData().getSingletonReadDbDataInstance();
+    //db.loadServerDb();
 
 });
 

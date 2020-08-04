@@ -1,6 +1,4 @@
-
 var firebase = require('./FirebaseConnection');
-
 
 class ReadData{
 

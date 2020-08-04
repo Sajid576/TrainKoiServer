@@ -1,4 +1,4 @@
-const AuthenticationModel = require('../model/AuthenticationModel');
+const AuthModel = require('../model/AuthenticationModel');
 
 
 
@@ -9,7 +9,7 @@ storeUserDataController =(req,res,next)=>{
     const email=req.body.email
     const phone=req.body.phone
 
-    AuthenticationModel.storeUserData(uid,username,email,phone).then(()=>{
+    new AuthModel.AuthenticaltionModel().storeUserData(uid,username,email,phone).then(()=>{
         res.status(200).json({
             message:'User data successfully saved',
             username:username,
@@ -33,7 +33,7 @@ editUserDataController =(req,res,next)=>{
     const username=req.body.username
     const phone=req.body.phone
    
-    AuthenticationModel.editUserData(uid,username,phone).then(()=>{
+    new AuthModel.AuthenticaltionModel().editUserData(uid,username,phone).then(()=>{
         res.status(200).json({
             message:'User data successfully edited',
             username:username,
@@ -53,20 +53,16 @@ readUserDataController =(req,res,next)=>{
     const uid=req.params.id;
     
     
-    AuthenticationModel.readUserData(uid).then(user=>{
-        res.status(202).json({
+    var user=new AuthModel.AuthenticaltionModel().readUserData(uid);
+    console.log("lel:: "+JSON.stringify(user));
+    res.status(202).json({
             message:'User data read successfully',
             username:user['username'],
             email:user['email'],
-            phone:user['phone']
+            phone:user['phone'],
+            coins:user['coins']
         })
-    }).catch(error=>{
-        console.log(error.message);
-        res.status(404).json({
-            message:'User data failed to read from server',
-            
-        })
-    })
+    
     
    
 }

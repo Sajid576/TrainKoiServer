@@ -23,8 +23,8 @@ class FileModel{
     // store the data according to the structure
     setDbModel()
     {
-        var dbbuild = new dbBuilder.DatabaseBuilder(this.station_junction_list,this.nodeToGeneratedCoordinateMap,
-                                    this.nodeTonodeDistMap);
+        var dbbuild = new dbBuilder.DatabaseBuilder(this.station_junction_list,
+                                            this.nodeToGeneratedCoordinateMap,this.nodeTonodeDistMap);
 
     }
 
