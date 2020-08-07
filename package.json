@@ -4,7 +4,7 @@
   "description": "This is a train location tracking project of Bangladesh",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "keywords": [
     "node",
