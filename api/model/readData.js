@@ -38,7 +38,7 @@ getSingletonReadDbDataInstance()
 //this method will fetch all required data from firestore to server variables on server startup.
 loadServerDb()
 {
-    //this.readAllNodeToCoordinateData();
+    this.readAllNodeToCoordinateData();
     this.readNodeToNodeDistance();
     this.readNodeToStation();
     this.readStationToCoordinate();
@@ -50,7 +50,6 @@ readAllNodeToCoordinateData()
    
    const query = firebase.firestore().collection('NodeToCoordinate').get();
 
-    
    query.then(snapshot => {
      snapshot.forEach(nodes => 
       {
@@ -139,7 +138,6 @@ readStationToCoordinate()
 {
     const query = firebase.firestore().collection('StationToCoordinate').doc('mapping');
 
-   
     query.get()
     .then(StationToCoordinate => {
       if(StationToCoordinate.exists)

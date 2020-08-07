@@ -20,11 +20,13 @@ drawRailwayTracksController =(req,res,next)=>{
 //this GET request is for generating path on google map
 drawRouteController =(req,res,next)=>{
     console.log(req.params.trainName)
-    console.log(req.params.stationName)
+    console.log(req.params.startingStation)
+    console.log(req.params.endingStation)
     console.log(req.params.serviceNo)
 
     trainName=req.params.trainName;
-    stationName=req.params.stationName;
+    startingStation=req.params.startingStation;
+    endingStation=req.params.endingStation;
     serviceNo=req.params.serviceNo;
     if(serviceNo=='2')
     {
@@ -41,7 +43,7 @@ drawRouteController =(req,res,next)=>{
         //console.log(myDatabase.fetchNodeTonodeDistance())
         var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
 
-        destinationNode = myDatabase.fetchstationToNode(stationName);       // starting/destination station
+        destinationNode = myDatabase.fetchstationToNode(startingStation);       
         
         var graph = new dijkstra.Graph(myDatabase.fetchNodeTonodeDistance(),preprocess);
         graph.initDjikstraAlgorithm("0",destinationNode);
@@ -63,7 +65,7 @@ drawRouteController =(req,res,next)=>{
             estimatedTime:estimatedTime,
             requiredDistance:total_dist,
             route:coordinateList,
-            velocity:trainData['velocity'],
+            traindata:trainData,
             direction:""
         })
     }
@@ -73,7 +75,7 @@ drawRouteController =(req,res,next)=>{
 
         var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
 
-        destinationNode = myDatabase.fetchstationToNode(stationName);       // starting/destination station
+        destinationNode = myDatabase.fetchstationToNode(endingStation);       
         
         var graph = new dijkstra.Graph(myDatabase.fetchNodeTonodeDistance(),preprocess);
         graph.initDjikstraAlgorithm("0",destinationNode);
@@ -95,7 +97,7 @@ drawRouteController =(req,res,next)=>{
             estimatedTime:estimatedTime,
             requiredDistance:total_dist,
             route:coordinateList,
-            velocity:trainData['velocity'],
+            traindata:trainData,
             direction:""
         })
     }

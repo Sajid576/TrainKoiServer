@@ -34,13 +34,14 @@ function storeTrainLocationToDb()
      }
 
 }
-//this function to fetch the location and velocity of a particular train from 'TrainLocationData' variable
+//this function to fetch the location and velocity of a particular train from 'TrainLocationData' variable 
+// in server
 function fetchTrainLoction(TrainName)
 {
     return TrainLocationData[TrainName];
 }
 
-//this function will be used to update the information of all the trains in real time
+//this function will be used to update the information of all the trains in real time in server
 function storeTrainLocation(TrainName,TrainData)
 {
     TrainLocationData[TrainName]=TrainData;
@@ -52,7 +53,9 @@ function storeTrainLocation(TrainName,TrainData)
 module.exports={
   
     fetchTrainLoction,
-    storeTrainLocation
+    storeTrainLocation,
+    fetchTrainLocationFromDb,
+    storeTrainLocationToDb,
+    
 }
 
-//fetchTrainLocationFromDb();
