@@ -3,7 +3,7 @@ var firebase = require('./FirebaseConnection');
 //this variable holds the information of all the trains
 var TrainLocationData={};
 
-//this function used for fetching locations of all trains from cloud firestore
+//this function used for fetching locations of all trains from cloud firestore on server startup
 async function fetchTrainLocationFromDb()
 {
     const snapshot = await firebase.firestore().collection('locations').get()
@@ -12,7 +12,9 @@ async function fetchTrainLocationFromDb()
     });
     console.log(TrainLocationData)   
 }
-//this function to store the train locations to the cloud firestore
+//this function to store the train locations to the cloud firestore according to the daily schedule basis
+//this function will be used later with event emitter so that we can store the train location once in a day.
+//It will reduce the CRUD operation on database.
 function storeTrainLocationToDb()
 {
     const Mp = new Map(Object.entries(TrainLocationData));

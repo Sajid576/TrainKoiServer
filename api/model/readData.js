@@ -187,6 +187,11 @@ fetchStationToCoordinate()
 {
     return ReadData.StationToCoordinate;
 }
+convertStationToCoordinate(stationName)
+{
+    return ReadData.StationToCoordinate[stationName];
+}
+
 fetchCoordinateToStation()
 {
     return ReadData.CoordinateToStation;

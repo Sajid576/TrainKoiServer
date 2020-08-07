@@ -8,9 +8,9 @@ timeEstimator=require('../model/TimeEstimator');
 //Get request for drawing black lines on the google map
 drawRailwayTracksController =(req,res,next)=>{
 
-    console.log(myDatabase.fetchNodesToCoordinatesMap());
+    console.log(new myDatabase.ReadData().fetchNodesToCoordinatesMap());
     //converting map object to json object so that we can pass it to response
-    const nodesToCoordinatesJsonObj = Object.fromEntries(myDatabase.fetchNodesToCoordinatesMap());
+    const nodesToCoordinatesJsonObj = Object.fromEntries(new myDatabase.ReadData().fetchNodesToCoordinatesMap());
     res.status(200).json({
         message:'Getting all the list of coordinates',
         list:nodesToCoordinatesJsonObj,
@@ -43,9 +43,9 @@ drawRouteController =(req,res,next)=>{
         //console.log(myDatabase.fetchNodeTonodeDistance())
         var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
 
-        destinationNode = myDatabase.fetchstationToNode(startingStation);       
+        destinationNode = new myDatabase.ReadData().fetchstationToNode(startingStation);       
         
-        var graph = new dijkstra.Graph(myDatabase.fetchNodeTonodeDistance(),preprocess);
+        var graph = new dijkstra.Graph(new myDatabase.ReadData().fetchNodeTonodeDistance(),preprocess);
         graph.initDjikstraAlgorithm("0",destinationNode);
         total_dist=graph.getShortestDistance();
         path=graph.getShortestPath();
@@ -60,12 +60,15 @@ drawRouteController =(req,res,next)=>{
         }
         var estimatedTime=timeEstimator.estimateTime(Number(total_dist),Number(trainData['velocity']));
 
+        var destinationCordinate= new myDatabase.ReadData().convertStationToCoordinate(startingStation);
+
         res.status(200).json({
             message:'lel',
             estimatedTime:estimatedTime,
             requiredDistance:total_dist,
             route:coordinateList,
             traindata:trainData,
+            destinationCordinate:destinationCordinate,
             direction:""
         })
     }
@@ -75,9 +78,9 @@ drawRouteController =(req,res,next)=>{
 
         var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
 
-        destinationNode = myDatabase.fetchstationToNode(endingStation);       
+        destinationNode = new myDatabase.ReadData().fetchstationToNode(endingStation);       
         
-        var graph = new dijkstra.Graph(myDatabase.fetchNodeTonodeDistance(),preprocess);
+        var graph = new dijkstra.Graph(new myDatabase.ReadData().fetchNodeTonodeDistance(),preprocess);
         graph.initDjikstraAlgorithm("0",destinationNode);
         total_dist=graph.getShortestDistance();
         path=graph.getShortestPath();
@@ -92,12 +95,15 @@ drawRouteController =(req,res,next)=>{
         }
         var estimatedTime=timeEstimator.estimateTime(Number(total_dist),Number(trainData['velocity']));
 
+        var destinationCordinate=new myDatabase.ReadData().convertStationToCoordinate(endingStation);
+
         res.status(200).json({
             message:'lel',
             estimatedTime:estimatedTime,
             requiredDistance:total_dist,
             route:coordinateList,
             traindata:trainData,
+            destinationCordinate:destinationCordinate,
             direction:""
         })
     }
