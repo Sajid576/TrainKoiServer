@@ -1,7 +1,7 @@
 {
-  "name": "rest-shop",
+  "name": "package.json",
   "version": "1.0.0",
-  "description": "A Node.js RESTful API Tutorial Project (Build a simple shop API)",
+  "description": "This is a train location tracking project of Bangladesh",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
@@ -11,7 +11,15 @@
     "restful",
     "api"
   ],
-  "author": "Maximilian Schwarzmüller",
+  "engines": {
+    "node": "12.16.3",
+    "npm": "6.14.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Abu Syeed Sajid Ahmed",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
