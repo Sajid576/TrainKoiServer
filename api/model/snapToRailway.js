@@ -10,7 +10,7 @@ module.exports={
 
 function convertPathToCoordinateList(path,nearestList)
 {
-    coordinatesMap=myDb.fetchNodesToCoordinatesMap();
+    coordinatesMap=new myDb.ReadData().fetchNodesToCoordinatesMap();
 
 
     mainlist=[];
@@ -38,7 +38,7 @@ function convertPathToCoordinateList(path,nearestList)
 
 function nearestNodesFinder(x,y)
 {
-    stationToCoordinate= myDb.fetchStationToCoordinate();
+    stationToCoordinate= new myDb.ReadData().fetchStationToCoordinate();
     const Mp = new Map(Object.entries(stationToCoordinate));
 
     //this priority queue will keep track of nearest 3 nodes(station/junction)
@@ -75,9 +75,9 @@ function nearestNodesFinder(x,y)
     station_junction_three = nearestNodeTrackerMap.front();
     nearestNodeTrackerMap.dequeue();
 
-    node1=myDb.fetchstationToNode(station_junction_one);
-    node2=myDb.fetchstationToNode(station_junction_two);
-    node3=myDb.fetchstationToNode(station_junction_three);
+    node1=new myDb.ReadData().fetchstationToNode(station_junction_one);
+    node2=new myDb.ReadData().fetchstationToNode(station_junction_two);
+    node3=new myDb.ReadData().fetchstationToNode(station_junction_three);
 
     node_list=[];
     node_list.push(node1);
