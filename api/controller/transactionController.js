@@ -5,7 +5,7 @@ const authModel=require('../model/AuthenticationModel');
 spendCoinDataController =(req,res,next)=>{
     const uid=req.body.uid
     
-    var coin= new authModel.AuthenticaltionModel().spendCoinData(uid); 
+    var coin=String(new authModel.AuthenticaltionModel().spendCoinData(uid)) ; 
 
     res.status(201).json({
         message:'1 User coin data spent successfully.\n Your current coin amount is:'+coin,
@@ -18,7 +18,7 @@ addCoinDataController =(req,res,next)=>{
     const uid=req.body.uid
     const requestedCoins=req.body.requestedCoins
     
-    var coin=new authModel.AuthenticaltionModel().addCoinData(uid,requestedCoins); 
+    var coin=String( new authModel.AuthenticaltionModel().addCoinData(uid,requestedCoins)); 
     res.status(202).json({
         message:'You successfully got '+requestedCoins+" coins.\n Your current coin amount is: "+coin,
         coins: coin,
