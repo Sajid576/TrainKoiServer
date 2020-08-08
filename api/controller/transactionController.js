@@ -3,7 +3,7 @@ const authModel=require('../model/AuthenticationModel');
 
 //PUT: spend coin data
 spendCoinDataController =(req,res,next)=>{
-    const uid=req.body.id
+    const uid=req.body.uid
     
     var coin= new authModel.AuthenticaltionModel().spendCoinData(uid); 
 
@@ -15,7 +15,7 @@ spendCoinDataController =(req,res,next)=>{
 
 //PUT: add more coin data [requestedCoinData=the amount of coin I want to add]
 addCoinDataController =(req,res,next)=>{
-    const uid=req.body.id
+    const uid=req.body.uid
     const requestedCoins=req.body.requestedCoins
     
     var coin=new authModel.AuthenticaltionModel().addCoinData(uid,requestedCoins); 
