@@ -9,7 +9,7 @@ spendCoinDataController =(req,res,next)=>{
 
     res.status(201).json({
         message:'1 User coin data spent successfully.\n Your current coin amount is:'+coin,
-        
+        coins:coin,
     })
 }
 
@@ -21,7 +21,7 @@ addCoinDataController =(req,res,next)=>{
     var coin=new authModel.AuthenticaltionModel().addCoinData(uid,requestedCoins); 
     res.status(202).json({
         message:'You successfully got '+requestedCoins+" coins.\n Your current coin amount is: "+coin,
-        
+        coins: coin,
     })
 }
 
