@@ -18,6 +18,7 @@ async storeUserData(uid,username,email,phone)
     var initialCoinAmount=20;
     //this code used for storing the user data into the server variables
     AuthenticaltionModel.AllUsersData[uid]={
+        'uid':uid,
         'username':username,
         'email':email,
         'phone':phone,
@@ -78,6 +79,7 @@ readUserDataFromDb()
             var username=users.data()['username'];
             var coins=users.data()['coins'];
             AuthenticaltionModel.AllUsersData[uid]={
+                'uid':uid,
                 'username':username,
                 'email':email,
                 'phone':phone,
@@ -102,7 +104,7 @@ readUserDataFromDb()
     
     
 }
-
+//this method used to fetch data from server to client side
 readUserData(uid)
 { 
     var userInfo=AuthenticaltionModel.AllUsersData[uid];

@@ -57,6 +57,7 @@ readUserDataController =(req,res,next)=>{
     console.log("lel:: "+JSON.stringify(user));
     res.status(202).json({
             message:'User data read successfully',
+            uid:user['uid'],
             username:user['username'],
             email:user['email'],
             phone:user['phone'],
