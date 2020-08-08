@@ -91,9 +91,25 @@ class FileModel{
                 var words=lines[i].split(",");
                 if(words[0]=='#')
                 {
-                    var coordinates=[];
-                
+                    var station_junction=words[1].trim();
+                    var nodeNo=words[2].trim();
                     
+                    //station/junction name---> nodeNo , coordinates of station/junction
+                    if( i < lines.length-1)
+                    {
+                        this.station_junction_list.set(station_junction,[ nodeNo,lines[i+1].trim() ]);
+                    
+                    }    
+                    else
+                    {
+                        //this condition will be true for last station/junction of the file
+                        this.station_junction_list.set(station_junction,[ nodeNo,lines[i-1].trim() ]);
+                        
+                    }
+                    
+                    
+                    
+                    var coordinates=[];
                     var k=i+1;
                     if(k==lines.length)break;
                     while(true)
@@ -109,25 +125,13 @@ class FileModel{
                     i=k;
                     var startNode=Number(words[2].trim());
                     var endNode=Number(lines[k].split(",")[2]);
+
+                    // storing the pair of nodes in ascending sorted order
                     if(startNode>endNode)  nodeToCoordinateTracker.set(endNode+','+startNode,coordinates);
                     else nodeToCoordinateTracker.set(startNode+','+endNode,coordinates);
                 
                 
-                    var station_junction=words[1].trim();
-                    var nodeNo=words[2].trim();
                     
-                    //station/junction name---> nodeNo , coordinates of station/junction
-                    if((i+1) != lines.length)
-                    {
-                        this.station_junction_list.set(station_junction,[ nodeNo,lines[i+1].trim() ]);
-                    
-                    }    
-                    else
-                    {
-                        //this condition will be true for last station/junction of the file
-                        this.station_junction_list.set(station_junction,[ nodeNo,lines[i-1].trim() ]);
-                    
-                    }
                 }
             
             
@@ -137,7 +141,7 @@ class FileModel{
        
     
     
-        //console.log(station_junction_list)
+        //console.log(this.station_junction_list)
         //console.log(nodeToCoordinateTracker);
         this.generateCoordinates(nodeToCoordinateTracker);
         this.generateDistance(nodeToCoordinateTracker);
