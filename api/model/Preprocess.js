@@ -52,24 +52,20 @@ class Preprocess{
     //this method used to verify the node of two endpoints of the nearestList
     verifyNodePoint(cord1,cord2)
     {
-        var CoordinateToStation=myDb.fetchCoordinateToStation();
+        var CoordinateToStation=new myDb.ReadData().fetchCoordinateToStation();
         var s1=CoordinateToStation.get(cord1);
         var s2=CoordinateToStation.get(cord2);
 
-        this.node1=myDb.fetchstationToNode(s1);
-        this.node2=myDb.fetchstationToNode(s2);
+        this.node1=new myDb.ReadData().fetchstationToNode(s1);
+        this.node2=new myDb.ReadData().fetchstationToNode(s2);
 
     }
 
     //this method used to divide the nearestList into two list at the middle of nearestListIndex
     divideList()
     {
-
-       
-        
         this.verifyNodePoint(this.nearestList[0],this.nearestList[this.nearestList.length-1]);
-        
-        
+           
         for(var i=0,j=i+1;j<this.nearestListIndex;i++,j++)
         {
             var cord = this.nearestList[i].split(',');
@@ -103,15 +99,7 @@ class Preprocess{
             this.last_portion_distance += dist;
             this.last_portion_list.push(this.nearestList[i]);
         }
-
-
-
-
-
     }
-
-
-
 }
 
 module.exports={
