@@ -93,13 +93,13 @@ drawRouteController =(req,res,next)=>{
         {
             var coordinateList= snapToRailway.convertPathToCoordinateList(path,preprocess.getLastPortionList());
         }
-        var estimatedTime=timeEstimator.estimateTime(Number(total_dist),Number(trainData['velocity']));
+        var estimatedTimeInfoObj=timeEstimator.estimateTime(Number(total_dist),Number(trainData['velocity']));
 
         var destinationCordinate=new myDatabase.ReadData().convertStationToCoordinate(endingStation);
 
         res.status(200).json({
-            message:'lel',
-            estimatedTime:estimatedTime,
+            message:estimatedTimeInfoObj['msg'],
+            estimatedTime:estimatedTimeInfoObj['time'],
             requiredDistance:total_dist,
             route:coordinateList,
             traindata:trainData,
