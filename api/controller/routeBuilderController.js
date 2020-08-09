@@ -40,7 +40,7 @@ drawRouteController =(req,res,next)=>{
     else if(serviceNo=='1')
     {
         var trainData= locationData.fetchTrainLoction(trainName);
-        //console.log(myDatabase.fetchNodeTonodeDistance())
+        
         var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
 
         destinationNode = new myDatabase.ReadData().fetchstationToNode(startingStation);       

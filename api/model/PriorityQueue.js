@@ -1,4 +1,7 @@
+
+
 function PriorityQueue () {
+    
     var collection = [];
     this.printCollection = function() {
       (console.log(collection));
@@ -21,8 +24,8 @@ function PriorityQueue () {
         }
     };
     this.dequeue = function() {
-        var value = collection.shift();
-        return value[0];
+         collection.shift();
+        //return value[0];
     };
     this.front = function() {
         return collection[0];
@@ -35,4 +38,6 @@ function PriorityQueue () {
     };
 }
 
-module.exports.PriorityQueue=PriorityQueue;
+module.exports={
+    PriorityQueue
+}

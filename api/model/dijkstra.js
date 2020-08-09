@@ -9,31 +9,32 @@ class Graph{
 
     constructor(nodeTonodeDistance,preprocess)
     {
-        for(var i=0;i<10;i++)
+        //initilizing with 100 nodes so that I can work with max 100 nodes.
+        for(var i=0;i<100;i++)
         {
             this.addNode(String(i));
             this.edges.set(String(i),[])
         }
-        console.log("lol:     "+this.edges.size);
+        console.log("initilizing with "+this.edges.size+" nodes so that I can work with max "+this.edges.size+"  nodes");
       
         for (let [key, value] of nodeTonodeDistance) 
         {
             var str=key.split(',');
-            var start=str[0];
-            var end=str[1];
+            var start=str[0].trim();
+            var end=str[1].trim();
             
-            setBidirectedAdjacent(start,end,value);   
+            this.setBidirectedAdjacent(start,end,value);   
         }
         //set adjacent among '0' no. node with its nearest two nodes
         
-        setBidirectedAdjacent(0,preprocess.getNode1(),preprocess.getFirstPortionDistance());
-        setBidirectedAdjacent(0,preprocess.getNode2(),preprocess.getLastPortionDistance());
+        this.setBidirectedAdjacent('0',preprocess.getNode1(),preprocess.getFirstPortionDistance());
+        this.setBidirectedAdjacent('0',preprocess.getNode2(),preprocess.getLastPortionDistance());
 
-       
+       /*
         for (let [key, value] of this.edges) 
         {
             console.log(key+"--"+JSON.stringify(value))
-        }
+        }*/
     }
     //this method used build the realtime bidirected adjacency list 
     setBidirectedAdjacent(u,v,wt)
@@ -42,7 +43,7 @@ class Graph{
             weight:Number(wt),
             node:v
         }
-
+        
         var temp_list=this.edges.get(u);
         temp_list.push(temp);
         this.edges.set(u,temp_list);
@@ -72,14 +73,17 @@ class Graph{
     {
         this.total_distances= distances[destinationNode];//set the distance in KM
     }
+    
     setDestinationPath(prev,i)
     {
         
-        if(prev[i]==-1)
+        if(prev[i]==null)
         { 
+
             this.path.push(i);
             return ;
         }
+        
         this.setDestinationPath(prev,prev[i]);
         this.path.push(i);
 
@@ -125,8 +129,8 @@ class Graph{
 
         this.setDestinationDistance(distances,destinationNode);
         this.setDestinationPath(prev,destinationNode);
-        console.log(total_distances)
-        console.log(JSON.stringify(path));
+        console.log("Total required distance:  "+this.total_distances.toFixed(3))
+        console.log("Total required path:   "+JSON.stringify(this.path));
      }
 
 

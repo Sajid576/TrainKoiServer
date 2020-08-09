@@ -71,11 +71,11 @@ class Preprocess{
             var cord = this.nearestList[i].split(',');
             var cord1 = this.nearestList[j].split(',');
 
-            x1 =Number(cord[0]);
-            y1 =Number(cord[1]);
+            var x1 =Number(cord[0]);
+            var y1 =Number(cord[1]);
            
-            x2 =Number(cord1[0]);
-            y2 =Number(cord1[1]);
+            var x2 =Number(cord1[0]);
+            var y2 =Number(cord1[1]);
             
             var dist = haversine.getDistance(x1, y1, x2, y2);
             this.first_portion_distance += dist;
@@ -88,11 +88,11 @@ class Preprocess{
             var cord = this.nearestList[i].split(',');
             var cord1 = this.nearestList[j].split(',');
 
-            x1 =Number(cord[0]);
-            y1 =Number(cord[1]);
+            var x1 =Number(cord[0]);
+            var y1 =Number(cord[1]);
            
-            x2 =Number(cord1[0]);
-            y2 =Number(cord1[1]);
+            var x2 =Number(cord1[0]);
+            var y2 =Number(cord1[1]);
             
             var dist = haversine.getDistance(x1, y1, x2, y2);
 

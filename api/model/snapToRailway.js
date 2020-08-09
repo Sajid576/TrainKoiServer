@@ -44,7 +44,8 @@ function nearestNodesFinder(x,y)
     //this priority queue will keep track of nearest 3 nodes(station/junction)
     //key-->station/junction  , value -> straight distance 
     //it will be sorted according to the straight distance
-    nearestNodeTrackerMap=priorityqueue.PriorityQueue();
+    var nearestNodeTrackerMap= new priorityqueue.PriorityQueue();
+    
 
     //traversing all the station and junctions for finding the nearest 2 node from the train coordinates
     for (let [key, value] of Mp) 
@@ -62,22 +63,31 @@ function nearestNodesFinder(x,y)
 
 
     }
+    //console.log(nearestNodeTrackerMap.printCollection());
 
      /* From the nearestNodeTrackerMap we will extract top 3 Station/junction to check at least 2 lists
              to determine in which track train is situated */
 
-    station_junction_one = nearestNodeTrackerMap.front();
+    station_junction_one = nearestNodeTrackerMap.front()[0];
     nearestNodeTrackerMap.dequeue();
 
-    station_junction_two = nearestNodeTrackerMap.front();
+    station_junction_two = nearestNodeTrackerMap.front()[0];
     nearestNodeTrackerMap.dequeue();
 
-    station_junction_three = nearestNodeTrackerMap.front();
+    station_junction_three = nearestNodeTrackerMap.front()[0];
     nearestNodeTrackerMap.dequeue();
+
+    //console.log("station_junction_one:  "+station_junction_one);
+    //console.log("station_junction_two:  "+station_junction_two);
+    //console.log("station_junction_three:  "+station_junction_three);
 
     node1=new myDb.ReadData().fetchstationToNode(station_junction_one);
     node2=new myDb.ReadData().fetchstationToNode(station_junction_two);
     node3=new myDb.ReadData().fetchstationToNode(station_junction_three);
+
+    //console.log("node1:  "+node1);
+    //console.log("node2:  "+node2);
+    //console.log("node3:  "+node3);
 
     node_list=[];
     node_list.push(node1);
@@ -95,7 +105,7 @@ function nearestNodesFinder(x,y)
 function nearestListIndexFinder(node_list,x,y)
 {
 
-    nodeTocoord= myDb.fetchNodesToCoordinatesMap();
+    var nodeTocoord= new myDb.ReadData().fetchNodesToCoordinatesMap();
 
     node1=node_list[0];
     node2=node_list[1];
@@ -108,6 +118,7 @@ function nearestListIndexFinder(node_list,x,y)
          we got our two nearest coordinate lists list1 & list2. Now we are going check which coordinate among these two lists is
          the closest to the train Coordinate .We are going to store that index in which NEAREST COORDINATE is located.
      */
+    
     var list1=nodeTocoord.get(key1);
     var list2=nodeTocoord.get(key2);
 
