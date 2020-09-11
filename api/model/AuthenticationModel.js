@@ -13,10 +13,7 @@ constructor()
 logger()
 {
     console.log("After modifying state of AllUsersData:  ");
-    for (let [key, value] of AuthenticaltionModel.AllUserDataMap) 
-    {
-          console.log(key + ' ==== ' +JSON.stringify(value) +"\n");
-    }
+    console.log(JSON.stringify(AuthenticaltionModel.AllUsersData,null,4));
 }
 
 //this method used for storing user data while signing up
