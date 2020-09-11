@@ -37,8 +37,8 @@ server.listen(port,()=>{
     console.log("Server listening on port: "+port);
 
     loadTrainData.fetchTrainLocationFromDb();
-    //new loadUserData.AuthenticaltionModel().readUserDataFromDb();
-    //new loadServer.ReadData().getSingletonReadDbDataInstance().loadServerDb();
+    new loadUserData.AuthenticaltionModel().readUserDataFromDb();
+    new loadServer.ReadData().getSingletonReadDbDataInstance().loadServerDb();
     
 
 });
