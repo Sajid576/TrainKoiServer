@@ -1,6 +1,6 @@
  
 var firebase = require('./FirebaseConnection');
-
+var trainData=require('./DatabaseBuilderModule/TrainData/TrainList')
 //this class used for building the firebase cloud firestore database by storing  the collected 
 //data from text files
 class DatabaseBuilder{
@@ -13,6 +13,30 @@ class DatabaseBuilder{
         this.setNodeToStationData_AND_stationToCoordinateData(station_junction_list);
 
     }
+    //this function used to build the 'locations' table in firestore
+    static async setLocationsData()
+    {
+        var trains= trainData.trainList;
+        var list=[];
+        trains.forEach(train=>{
+            list.push({
+                "trainName":train,
+                "latitude":"23.323232",
+                "longitude":"90.242242",
+                "time":"null",
+                "velocity":"3"
+            });
+
+        })
+        
+        const locationCollection =await firebase.firestore().collection('locations');
+        await locationCollection.doc("trainData").set({
+            Data: firebase.firestore.FieldValue.arrayUnion.apply(null,list)
+        })
+       
+    
+    }
+
 
     setNodeToCoordinateData(nodeToGeneratedCoordinateMap)
     {

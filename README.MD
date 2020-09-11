@@ -45,3 +45,6 @@
 - Database builder request: (this request will be for building the database using the data of text files):
 
 databaseBuilderApi/buildDatabase   POST
+
+- Train Database builder request:(it will build train database with dummy data)
+databaseBuilderApi/buildDatabase/trainList   POST
