@@ -10,6 +10,14 @@ constructor()
 {
 
 }
+logger()
+{
+    console.log("After modifying state of AllUsersData:  ");
+    for (let [key, value] of AuthenticaltionModel.AllUserDataMap) 
+    {
+          console.log(key + ' ==== ' +JSON.stringify(value) +"\n");
+    }
+}
 
 //this method used for storing user data while signing up
 async storeUserData(uid,username,email,phone) 
@@ -25,11 +33,7 @@ async storeUserData(uid,username,email,phone)
         'coins':initialCoinAmount
     } ;
 
-    console.log("After modifying(signing up a user) server variables:  ");
-    for (let [key, value] of AuthenticaltionModel.AllUserDataMap) 
-    {
-          console.log(key + ' ==== ' +JSON.stringify(value) +"\n");
-    }
+    this.logger();
     //this code used for storing user data into the firebase firestore database
     const usersCollection = firebase.firestore().collection('Users');
     usersCollection.doc(uid).set({
@@ -47,11 +51,9 @@ async  editUserData(uid,username,phone)
     //this code used for storing the user data into the server variables
     AuthenticaltionModel.AllUsersData[uid]['username']=username;
     AuthenticaltionModel.AllUsersData[uid]['phone']=phone;
-   console.log("After modifying server variables(user data):  ");
-    for (let [key, value] of AuthenticaltionModel.AllUserDataMap) 
-    {
-          console.log(key + ' ==== ' +JSON.stringify(value) +"\n");
-    }
+    
+    this.logger();
+    
     //this code used for storing user data into the firebase firestore database in merge mode
     const usersCollection = firebase.firestore().collection('Users');
     usersCollection.doc(uid).set({
@@ -88,13 +90,7 @@ readUserDataFromDb()
                
         
       });
-        AuthenticaltionModel.AllUserDataMap = new Map(Object.entries(AuthenticaltionModel.AllUsersData));
-        //printing all user details on server
-        console.log("printing all user details on server: ");
-        for (let [key, value] of AuthenticaltionModel.AllUserDataMap) 
-        {
-              console.log(key + ' ==== ' +JSON.stringify(value) +"\n");
-        }
+        this.logger();
          
         
    })
@@ -120,11 +116,7 @@ spendCoinData(uid)
     AuthenticaltionModel.AllUsersData[uid]=userInfo;
 
 
-    console.log("After modifying server variables(user data):  ");
-    for (let [key, value] of AuthenticaltionModel.AllUserDataMap) 
-    {
-          console.log(key + ' ==== ' +JSON.stringify(value) +"\n");
-    }
+    this.logger();
 
     return String(coin);
 
@@ -139,11 +131,7 @@ addCoinData(uid,requestedCoin)
     AuthenticaltionModel.AllUsersData[uid]=userInfo;
 
 
-    console.log("After modifying server variables(user data):  ");
-    for (let [key, value] of AuthenticaltionModel.AllUserDataMap) 
-    {
-          console.log(key + ' ==== ' +JSON.stringify(value) +"\n");
-    }
+    this.logger();
     return String(coin);
 
 }
