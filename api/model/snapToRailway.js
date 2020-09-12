@@ -118,9 +118,11 @@ function nearestListIndexFinder(node_list,x,y)
          we got our two nearest coordinate lists list1 & list2. Now we are going check which coordinate among these two lists is
          the closest to the train Coordinate .We are going to store that index in which NEAREST COORDINATE is located.
      */
-    
+    console.log("key1: "+key1+","+"key2: "+key2);
     var list1=nodeTocoord.get(key1);
     var list2=nodeTocoord.get(key2);
+
+    console.log(list1.length+","+list2.length);
 
     var Min_dist=1000000000;
     var nearest_index=0;
