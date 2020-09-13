@@ -63,8 +63,8 @@ drawRouteController =(req,res,next)=>{
         var destinationCordinate= new myDatabase.ReadData().convertStationToCoordinate(startingStation);
 
         res.status(200).json({
-            message:'lel',
-            estimatedTime:estimatedTime,
+            message:estimatedTime['msg'],
+            estimatedTime:estimatedTime['time'],
             requiredDistance:total_dist,
             route:coordinateList,
             traindata:trainData,
