@@ -129,7 +129,7 @@ addCoinData(uid,requestedCoin)
 
 
     this.logger();
-    return String(coin);
+    return coin;
 
 }
 
