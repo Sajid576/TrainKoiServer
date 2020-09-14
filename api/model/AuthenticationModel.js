@@ -123,7 +123,7 @@ addCoinData(uid,requestedCoin)
 {
     requestedCoin=Number(requestedCoin);
     var userInfo=this.readUserData(uid);
-    var coin=Number(userInfo['coins']);
+    var coin=Number(userInfo[uid]['coins']);
     console.log(coin+"----"+requestedCoin);
     coin=coin+ requestedCoin;
     userInfo['coins']=coin;
