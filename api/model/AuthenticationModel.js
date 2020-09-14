@@ -121,9 +121,10 @@ spendCoinData(uid)
 }
 addCoinData(uid,requestedCoin)
 {
+    requestedCoin=Number(requestedCoin);
     var userInfo=this.readUserData(uid);
     var coin=Number(userInfo['coins']);
-    coin+=Number(requestedCoin);
+    coin=coin+ requestedCoin;
     userInfo['coins']=coin;
     AuthenticaltionModel.AllUsersData[uid]=userInfo;
 
