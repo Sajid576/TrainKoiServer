@@ -126,7 +126,7 @@ addCoinData(uid,requestedCoin)
     var coin=Number(userInfo[uid]['coins']);
     console.log(coin+"----"+requestedCoin);
     coin=coin+ requestedCoin;
-    userInfo['coins']=coin;
+    userInfo[uid]['coins']=coin;
     AuthenticaltionModel.AllUsersData[uid]=userInfo;
 
 
