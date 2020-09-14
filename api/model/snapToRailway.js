@@ -7,14 +7,72 @@ module.exports={
     nearestNodesFinder,
     convertPathToCoordinateList
 }
-
-function convertPathToCoordinateList(path,nearestList)
+/**
+ * first denotes the (lat,lon) of the 1st index in the list
+ * last denotes the (lat,lon) of the last index in the list
+ * coord denotes 
+ * 1) (lat,lon) of train
+ * 2) the (lat,lon) of the last index.  
+ */
+indicateRouteCoordinate=(coord,first,last)=>
 {
+            x        = coord.split(',');
+            y        = coord.split(',');
+        starting_lat = first.split(',');
+        starting_lon = first.split(',');
+        ending_lat   = last.split(',');
+        ending_lon   = last.split(',');
+
+        d1=haversine.getDistance(Number(x),Number(y),Number(starting_lat),Number(starting_lon));
+        d2=haversine.getDistance(Number(x),Number(y),Number(ending_lat),Number(ending_lon));
+        /**
+         *  below conditions are used for finding nearest location of upcoming list from
+         *  last index location of mainlist.    
+         *  
+         *  1 denote the first index of upcoming list.
+         *  2 denote the last index of upcoming list.
+         */
+        if(d1>d2)
+        {
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+}
+/**
+ * this mergeLists method merge the mainlist with the upcoming list(the lists that are 
+ * generating from the nodePair ) according to the   
+ * 
+ */
+mergeLists=(flag,mainlist,upcomingList)=>
+{
+
+    if(flag==1)
+    {
+        mainlist.push.apply(mainlist,upcomingList);
+    }
+    else 
+    {
+        for(var i=upcomingList.length-1;i>=0;i--)
+        {
+            mainlist.push(upcomingList[i]);
+        }
+    }
+}
+// this method generate a list of coordinates from path list . 
+function convertPathToCoordinateList(trainData,path,nearestList)
+{
+    
     coordinatesMap=new myDb.ReadData().fetchNodesToCoordinatesMap();
 
-
+    var coord= trainData['latitude']+','+trainData['longitude'];
     mainlist=[];
-    mainlist.push.apply(mainlist,nearestList);
+    var flag=indicateRouteCoordinate(coord,nearestList[0],nearestList[nearestList.length-1]);
+    mergeLists(flag,mainlist,nearestList);
+    
+
 
     for(var i=1;i<path.length-1;i++)
     {
@@ -23,11 +81,14 @@ function convertPathToCoordinateList(path,nearestList)
         if(coordinatesMap.has(edge))
         {
             var temp_list= coordinatesMap.get(edge);
-            mainlist.push.apply(mainlist,temp_list);
+            var flag=indicateRouteCoordinate(mainlist[mainlist.length-1],temp_list[0],temp_list[temp_list.length-1]);
+            mergeLists(flag,mainlist,temp_list);
+            
         }
         else{
             var temp_list= coordinatesMap.get(Rev_edge);
-            mainlist.push.apply(mainlist,temp_list);
+            var flag=indicateRouteCoordinate(mainlist[mainlist.length-1],temp_list[0],temp_list[temp_list.length-1]);
+            mergeLists(flag,mainlist,temp_list);
         }
 
     }

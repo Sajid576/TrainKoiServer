@@ -87,11 +87,11 @@ drawRouteController =(req,res,next)=>{
 
         if(path[1]==preprocess.getNode1())
         {
-            var coordinateList= snapToRailway.convertPathToCoordinateList(path,preprocess.getFirstPortionList());
+            var coordinateList= snapToRailway.convertPathToCoordinateList(trainData,path,preprocess.getFirstPortionList());
         }
         else
         {
-            var coordinateList= snapToRailway.convertPathToCoordinateList(path,preprocess.getLastPortionList());
+            var coordinateList= snapToRailway.convertPathToCoordinateList(trainData,path,preprocess.getLastPortionList());
         }
         var estimatedTimeInfoObj=timeEstimator.estimateTime(Number(total_dist),Number(trainData['velocity']));
 
