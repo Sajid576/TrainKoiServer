@@ -33,12 +33,12 @@ class Preprocess{
     }
     getFirstPortionList()
     {
-        console.log("first portion length:  "+this.first_portion_list.length);
+        //console.log("first portion length:  "+this.first_portion_list.length);
         return this.first_portion_list;
     }
     getLastPortionList()
     {
-        console.log("last portion length: "+this.last_portion_list.length);
+        //console.log("last portion length: "+this.last_portion_list.length);
         return this.last_portion_list;
     }
     getFirstPortionDistance()
@@ -104,8 +104,8 @@ class Preprocess{
             this.last_portion_list.push(this.nearestList[i]);
         }
 
-        console.log("first portion:  "+this.first_portion_list);
-        console.log("last portion:  "+this.last_portion_list);
+       // console.log("first portion:  "+this.first_portion_list);
+        //console.log("last portion:  "+this.last_portion_list);
     }
 }
 

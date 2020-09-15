@@ -113,7 +113,7 @@ function nearestNodesFinder(x,y)
     // and train node. 
     for (let [key, value] of Mp) 
     {
-        console.log(key + ' = ' + value);
+        //console.log(key + ' = ' + value);
           
         str=value.split(',');
         lat=str[0];
@@ -150,9 +150,8 @@ function nearestNodesFinder(x,y)
     node3=new myDb.ReadData().fetchstationToNode(station_junction_three);
     node4=new myDb.ReadData().fetchstationToNode(station_junction_four);
 
-    //console.log("node1:  "+node1);
-    //console.log("node2:  "+node2);
-    //console.log("node3:  "+node3);
+    //console.log("node1:  "+node1+",node2:  "+node2+",node3:  "+node3+",node4:  "+node4);
+    
 
     node_list=[];
     node_list.push(node1);
