@@ -22,11 +22,11 @@ class Graph{
             var str=key.split(',');
             var start=str[0].trim();
             var end=str[1].trim();
-            
+            //console.log(start+','+end+'->'+value);
             this.setBidirectedAdjacent(start,end,value);   
         }
         //set adjacent among '0' no. node with its nearest two nodes
-        
+        console.log("lel");
         this.setBidirectedAdjacent('0',preprocess.getNode1(),preprocess.getFirstPortionDistance());
         this.setBidirectedAdjacent('0',preprocess.getNode2(),preprocess.getLastPortionDistance());
 
@@ -52,7 +52,7 @@ class Graph{
             weight:Number(wt),
             node:u
         }
-
+        
         var temp_list1=this.edges.get(v);
         temp_list1.push(temp1);
         this.edges.set(v,temp_list1);

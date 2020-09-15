@@ -64,7 +64,7 @@ mergeLists=(flag,mainlist,upcomingList)=>
 // this method generate a list of coordinates from path list . 
 function convertPathToCoordinateList(trainData,path,nearestList)
 {
-    
+    //console.log('convertPathToCoordinate called:  '+nearestList)
     coordinatesMap=new myDb.ReadData().fetchNodesToCoordinatesMap();
 
     var coord= trainData['latitude']+','+trainData['longitude'];
@@ -188,18 +188,19 @@ function nearestListIndexFinder(node_list,x,y)
          we got our two nearest coordinate lists list1 & list2. Now we are going check which coordinate among these two lists is
          the closest to the train Coordinate .We are going to store that index in which NEAREST COORDINATE is located.
      */
-    console.log("key1: "+key1+","+"key2: "+key2+"key3: "+key3);
+    
     var list1=nodeTocoord.get(key1);
     var list2=nodeTocoord.get(key2);
     var list3=nodeTocoord.get(key3);
 
-    console.log(list1+"\n"+list2+"\n"+list3);
-
+    
+    console.log("key1: "+key1+","+"key2: "+key2+"key3: "+key3);
     var Min_dist=1000000000;
     var nearest_index=0;
     var list_indicator=0;
     if(list1!=null)
     {
+        console.log("list1:  "+list1.length);
         for(var i=0;i<list1.length;i++)
         {
             
@@ -220,6 +221,7 @@ function nearestListIndexFinder(node_list,x,y)
     }
     if(list2!=null)
     {
+        console.log("list2:  "+list2.length);
                 /*
         After getting minimum distanced Train index in list1,we are going to check if more minimum distanced 
         Train index exist in list2 or not .
@@ -243,6 +245,7 @@ function nearestListIndexFinder(node_list,x,y)
     }
     if(list3!=null)
     {
+        console.log("list3:  "+list3.length);
         /*
         After getting minimum distanced Train index in list1,we are going to check if more minimum distanced 
         Train index exist in list2 or not .
@@ -265,7 +268,7 @@ function nearestListIndexFinder(node_list,x,y)
         }
     }
     
-
+    console.log("list indicator:  "+list_indicator);
     if(list_indicator==1)
     {    
         var pre=new preprocess.Preprocess(list1,nearest_index);

@@ -33,10 +33,12 @@ class Preprocess{
     }
     getFirstPortionList()
     {
+        console.log("first portion length:  "+this.first_portion_list.length);
         return this.first_portion_list;
     }
     getLastPortionList()
     {
+        console.log("last portion length: "+this.last_portion_list.length);
         return this.last_portion_list;
     }
     getFirstPortionDistance()
@@ -50,18 +52,20 @@ class Preprocess{
 
 
     //this method used to verify the node of two endpoints of the nearestList
+    // Exception: it can throw null pointer if 
     verifyNodePoint(cord1,cord2)
     {
         var CoordinateToStation=new myDb.ReadData().fetchCoordinateToStation();
         var s1=CoordinateToStation.get(cord1);
         var s2=CoordinateToStation.get(cord2);
 
+        console.log(s1+","+s2+"---"+cord1+","+cord2);
         this.node1=new myDb.ReadData().fetchstationToNode(s1);
         this.node2=new myDb.ReadData().fetchstationToNode(s2);
 
     }
 
-    //this method used to divide the nearestList into two list at the middle of nearestListIndex
+    //this method used to divide the nearestList into two list at the point of nearestListIndex
     divideList()
     {
         this.verifyNodePoint(this.nearestList[0],this.nearestList[this.nearestList.length-1]);
@@ -99,6 +103,9 @@ class Preprocess{
             this.last_portion_distance += dist;
             this.last_portion_list.push(this.nearestList[i]);
         }
+
+        console.log("first portion:  "+this.first_portion_list);
+        console.log("last portion:  "+this.last_portion_list);
     }
 }
 
