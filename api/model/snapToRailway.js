@@ -193,7 +193,7 @@ function nearestListIndexFinder(node_list,x,y)
     var list2=nodeTocoord.get(key2);
     var list3=nodeTocoord.get(key3);
 
-    console.log(list1.length+","+list2.length+","+list3.length);
+    console.log(list1+"\n"+list2+"\n"+list3);
 
     var Min_dist=1000000000;
     var nearest_index=0;
