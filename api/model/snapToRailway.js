@@ -96,7 +96,8 @@ function convertPathToCoordinateList(trainData,path,nearestList)
 
 }
 
-
+// this method will generate 'nearestNodeTrackerMap' that wil be used find 4 nearest nodes so that we can 
+// easily fetch their corresponding 3 lists from database
 function nearestNodesFinder(x,y)
 {
     stationToCoordinate= new myDb.ReadData().fetchStationToCoordinate();
@@ -108,7 +109,8 @@ function nearestNodesFinder(x,y)
     var nearestNodeTrackerMap= new priorityqueue.PriorityQueue();
     
 
-    //traversing all the station and junctions for finding the nearest 2 node from the train coordinates
+    //traversing all the station and junctions for sorting the nodes according to the distance between nodes
+    // and train node. 
     for (let [key, value] of Mp) 
     {
         console.log(key + ' = ' + value);
@@ -137,7 +139,8 @@ function nearestNodesFinder(x,y)
 
     station_junction_three = nearestNodeTrackerMap.front()[0];
     nearestNodeTrackerMap.dequeue();
-
+    station_junction_four = nearestNodeTrackerMap.front()[0];
+    nearestNodeTrackerMap.dequeue();
     //console.log("station_junction_one:  "+station_junction_one);
     //console.log("station_junction_two:  "+station_junction_two);
     //console.log("station_junction_three:  "+station_junction_three);
@@ -145,6 +148,7 @@ function nearestNodesFinder(x,y)
     node1=new myDb.ReadData().fetchstationToNode(station_junction_one);
     node2=new myDb.ReadData().fetchstationToNode(station_junction_two);
     node3=new myDb.ReadData().fetchstationToNode(station_junction_three);
+    node4=new myDb.ReadData().fetchstationToNode(station_junction_four);
 
     //console.log("node1:  "+node1);
     //console.log("node2:  "+node2);
@@ -154,7 +158,7 @@ function nearestNodesFinder(x,y)
     node_list.push(node1);
     node_list.push(node2);
     node_list.push(node3);
-    //sorting the top 3 nearest nodes so that we can easily fetch their corresponding 2 lists.
+    node_list.push(node4);
     node_list.sort();
     
     
@@ -162,7 +166,10 @@ function nearestNodesFinder(x,y)
     return pre;
 
 }
-
+/**
+ * this method will find the nearest discrete coordinate value from a given continuous coordinate value.
+ * 
+ */
 function nearestListIndexFinder(node_list,x,y)
 {
 
@@ -171,68 +178,105 @@ function nearestListIndexFinder(node_list,x,y)
     node1=node_list[0];
     node2=node_list[1];
     node3=node_list[2];
+    node4=node_list[3];
 
     key1=node1+","+node2;
     key2=node2+","+node3;
+    key3=node3+","+node4;
 
      /*
          we got our two nearest coordinate lists list1 & list2. Now we are going check which coordinate among these two lists is
          the closest to the train Coordinate .We are going to store that index in which NEAREST COORDINATE is located.
      */
-    console.log("key1: "+key1+","+"key2: "+key2);
+    console.log("key1: "+key1+","+"key2: "+key2+"key3: "+key3);
     var list1=nodeTocoord.get(key1);
     var list2=nodeTocoord.get(key2);
+    var list3=nodeTocoord.get(key3);
 
-    console.log(list1.length+","+list2.length);
+    console.log(list1.length+","+list2.length+","+list3.length);
 
     var Min_dist=1000000000;
     var nearest_index=0;
     var list_indicator=0;
-    for(var i=0;i<list1.length;i++)
+    if(list1!=null)
     {
+        for(var i=0;i<list1.length;i++)
+        {
             
-        cord=list1[i].split(',');
+            cord=list1[i].split(',');
 
-        var x0=Number(cord[0]);
-        var y0=Number(cord[1]);
+            var x0=Number(cord[0]);
+            var y0=Number(cord[1]);
 
-        //(x,y) is the real current location of the train
-        dist=haversine.getDistance(x,y,x0,y0);
-        if(dist<Min_dist)
-        {
-            Min_dist=dist;
-            nearest_index=i;
-            list_indicator=1;
+            //(x,y) is the real current location of the train
+            dist=haversine.getDistance(x,y,x0,y0);
+            if(dist<Min_dist)
+            {
+                Min_dist=dist;
+                nearest_index=i;
+                list_indicator=1;
+            }
         }
     }
-    /*
-     After getting minimum distanced Train index in list1,we are going to check if more minimum distanced 
-    Train index exist in list2 or not .
-     */
-    for(var i=0;i<list2.length;i++)
+    if(list2!=null)
     {
-        cord=list2[i].split(',');
-
-        var x0=Number(cord[0]);
-        var y0=Number(cord[1]);
-
-        //(x,y) is the real current location of the train
-        dist=haversine.getDistance(x,y,x0,y0);
-        if(dist<Min_dist)
+                /*
+        After getting minimum distanced Train index in list1,we are going to check if more minimum distanced 
+        Train index exist in list2 or not .
+        */
+        for(var i=0;i<list2.length;i++)
         {
-            Min_dist=dist;
-            nearest_index=i;
-            list_indicator=2;
+            cord=list2[i].split(',');
+
+            var x0=Number(cord[0]);
+            var y0=Number(cord[1]);
+
+            //(x,y) is the real current location of the train
+            dist=haversine.getDistance(x,y,x0,y0);
+            if(dist<Min_dist)
+            {
+                Min_dist=dist;
+                nearest_index=i;
+                list_indicator=2;
+            }
         }
     }
+    if(list3!=null)
+    {
+        /*
+        After getting minimum distanced Train index in list1,we are going to check if more minimum distanced 
+        Train index exist in list2 or not .
+        */
+        for(var i=0;i<list3.length;i++)
+        {
+            cord=list3[i].split(',');
+
+            var x0=Number(cord[0]);
+            var y0=Number(cord[1]);
+
+            //(x,y) is the real current location of the train
+            dist=haversine.getDistance(x,y,x0,y0);
+            if(dist<Min_dist)
+            {
+                Min_dist=dist;
+                nearest_index=i;
+                list_indicator=3;
+            }
+        }
+    }
+    
 
     if(list_indicator==1)
     {    
         var pre=new preprocess.Preprocess(list1,nearest_index);
     }
-    else
+    else if(list_indicator==2)
     {
         var pre= new preprocess.Preprocess(list2,nearest_index)
+    }
+    else 
+    {
+        var pre= new preprocess.Preprocess(list3,nearest_index)
     }
 
     return pre;
