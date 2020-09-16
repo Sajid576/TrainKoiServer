@@ -51,47 +51,99 @@
 
 ## Authentication API :
 
-- SignUp Request (User data store request) : 
-  authenticationApi/users  POST  newUser
-  [Request body=newUser]
+- SignUp:
 
-- EditUserData request:
-  authenticationApi/users/edit  PUT  editedData
-	[Request body=editedData]
+> POST  authenticationApi/users  
+  
+  *Request JSON object:*
+    - uid(string): A unique user id.
+    - username(string):A name choosen by the user.
+    - email(string): User email.
+    - phone(string): User mobile number.
+  
+  *Response JSON object:*
+    - message(string): successful
 
-- Particular User data fetch request:
-	authenticationApi/users/read/id  GET
-	[Request parameter=id & response body=user details]
+- EditUserData:
+> PUT authenticationApi/users/edit   
 
-     
+   *Request JSON object:*
+    - uid(string): A unique user id.
+    - username(string):A name choosen by the user.
+    - phone(string): User mobile number.
+
+   *Response JSON object:*
+     - message(string): successful
+
+- User data fetch:
+
+> GET  authenticationApi/users/read/(string:id)
+
+   *Response JSON object:*
+      - message(string): successful
+      - uid(string): A unique user id.
+      - username(string):A name choosen by the user.
+      - email(string): User email.
+      - phone(string): User mobile number.
+	  
 
 ## Transaction API :
 
-- spendCoin Request:(this is used for spending one coin of a particular user)
-	transactionApi/users/spend   PUT  
-	[body=uid]
+- Spend Coin :
+   
+>  PUT transactionApi/users/spend 
+     * Request JSON object:*
+             - uid(string): A unique user id.
+     *Response JSON object:*
+	     - message(string): successful
+             - coins(string):total amount of coin of a particular user
 
-- addMoreCoin Request:(this is used for adding a requested amount of coin of a particular user)
-	transactionApi/users/add   PUT  
-	[body=uid,requestedCoin]
+- Add More Coin:
+> PUT transactionApi/users/add 
+     * Request JSON object:*
+             - uid(string): A unique user id.
+             - requestedCoins(string): The amount coins a particular user want to add
+     *Response JSON object:*
+	     - message(string): successful
+             - coins(string):total amount of coin of a particular user
 
 ## RailwayRouteMaker API :
-- DrawRailwayTracks Request:(this request is made for drawing black lines on the google map) (invalid for now) 
-	routeBuilderApi/  GET
 
-- DrawRoute Request:(this request is for generating path on google map)
-	routeBuilderApi/:trainName/:startingStation/:endingStation/:serviceNo GET	
-	(parameter=  train name,destination/starting stationName )
+- Draw Route on Google Map:
+
+> GET  routeBuilderApi/(string:trainName|string:startingStation|string:endingStation|string:serviceNo/
+     *Response JSON object:*
+	     - message(string): Required time information in Bangla string format
+             - estimatedTime(number): Estimated time in seconds.
+             - requiredDistance(number): Required distance from train to queried station in KM.
+             - route(list): All the coordinates(lat,lon) in string format from train to queried station.
+             - traindata(object): 
+		       - trainName(string): Name of the queried train.
+                       - latitude(string): latitude value of the train.
+		       - longitude(string): longitude value of the train.
+		       - velocity(string): velocity of the queried train.
+		       - time(string): time of the last location update.
+             - destinationCordinate(string): Coordinate of destination station.
+             - direction(string) : information of direction of the queried train between two nearest stations.
+
 
 ## Location Tracking API :
-- storeNewLocation Request:(this request will be made from tracking device to store location of the train):
-	locationTrackingApi/newLocationData  POST  
-	(body=lat,lon,velocity,time,trainName)
 
-
+- Send train location from device:
+> POST  locationTrackingApi/newLocationData
+	*Response JSON object:*
+	       - trainName(string): Name of the queried train.
+               - latitude(string): latitude value of the train.
+	       - longitude(string): longitude value of the train.
+	       - velocity(string): velocity of the queried train.
+	       - time(string): time of the last location update.
+	    
 ## Database Builder API :
 - Database builder request: (this request will be for building the database using the data of text files):
-  databaseBuilderApi/buildDatabase   POST
+
+> POST databaseBuilderApi/buildDatabase   
 
 - Train Database builder request:(it will build train database with dummy data)
-  databaseBuilderApi/buildDatabase/trainList   POST
+
+> POST  databaseBuilderApi/buildDatabase/trainList  
+
