@@ -55,24 +55,28 @@
 
 > POST  authenticationApi/users  
   
-  *Request JSON object:*
+  ** Request JSON object: **
+
     - uid(string): A unique user id.
     - username(string):A name choosen by the user.
     - email(string): User email.
     - phone(string): User mobile number.
   
   *Response JSON object:*
+
     - message(string): successful
 
 - EditUserData:
 > PUT authenticationApi/users/edit   
 
    *Request JSON object:*
+
     - uid(string): A unique user id.
     - username(string):A name choosen by the user.
     - phone(string): User mobile number.
 
    *Response JSON object:*
+
      - message(string): successful
 
 - User data fetch:
@@ -85,27 +89,39 @@
       - username(string):A name choosen by the user.
       - email(string): User email.
       - phone(string): User mobile number.
+
 	  
 
 ## Transaction API :
 
 - Spend Coin :
    
->  PUT transactionApi/users/spend 
+>  PUT transactionApi/users/spend
+ 
      * Request JSON object:*
+
              - uid(string): A unique user id.
+
      *Response JSON object:*
+
 	     - message(string): successful
              - coins(string):total amount of coin of a particular user
 
+
 - Add More Coin:
-> PUT transactionApi/users/add 
+
+> PUT transactionApi/users/add
+ 
      * Request JSON object:*
+
              - uid(string): A unique user id.
-             - requestedCoins(string): The amount coins a particular user want to add
+             - requestedCoins(string): The amount coins a particular user want to add.
+
      *Response JSON object:*
+
 	     - message(string): successful
              - coins(string):total amount of coin of a particular user
+
 
 ## RailwayRouteMaker API :
 
@@ -113,6 +129,7 @@
 
 > GET  routeBuilderApi/(string:trainName|string:startingStation|string:endingStation|string:serviceNo/
      *Response JSON object:*
+
 	     - message(string): Required time information in Bangla string format
              - estimatedTime(number): Estimated time in seconds.
              - requiredDistance(number): Required distance from train to queried station in KM.
@@ -127,16 +144,21 @@
              - direction(string) : information of direction of the queried train between two nearest stations.
 
 
+
 ## Location Tracking API :
 
 - Send train location from device:
+
 > POST  locationTrackingApi/newLocationData
+
 	*Response JSON object:*
+
 	       - trainName(string): Name of the queried train.
                - latitude(string): latitude value of the train.
 	       - longitude(string): longitude value of the train.
 	       - velocity(string): velocity of the queried train.
 	       - time(string): time of the last location update.
+
 	    
 ## Database Builder API :
 - Database builder request: (this request will be for building the database using the data of text files):
