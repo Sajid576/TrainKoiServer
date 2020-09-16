@@ -129,7 +129,8 @@
 - Draw Route on Google Map:
 
 > GET  routeBuilderApi/(string:trainName|string:startingStation|string:endingStation|string:serviceNo/
-     *Response JSON object:*
+     
+        *Response JSON object:*
 
 	     - message(string): Required time information in Bangla string format
              - estimatedTime(number): Estimated time in seconds.
