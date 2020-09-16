@@ -55,7 +55,7 @@
 
 > POST  authenticationApi/users  
   
-  ** Request JSON object: **
+  * Request JSON object: *
 
     - uid(string): A unique user id.
     - username(string):A name choosen by the user.
@@ -84,6 +84,7 @@
 > GET  authenticationApi/users/read/(string:id)
 
    *Response JSON object:*
+
       - message(string): successful
       - uid(string): A unique user id.
       - username(string):A name choosen by the user.
@@ -104,7 +105,7 @@
 
      *Response JSON object:*
 
-	     - message(string): successful
+             - message(string): successful
              - coins(string):total amount of coin of a particular user
 
 
@@ -119,7 +120,7 @@
 
      *Response JSON object:*
 
-	     - message(string): successful
+             - message(string): successful
              - coins(string):total amount of coin of a particular user
 
 
@@ -135,11 +136,11 @@
              - requiredDistance(number): Required distance from train to queried station in KM.
              - route(list): All the coordinates(lat,lon) in string format from train to queried station.
              - traindata(object): 
-		       - trainName(string): Name of the queried train.
+                       - trainName(string): Name of the queried train.
                        - latitude(string): latitude value of the train.
-		       - longitude(string): longitude value of the train.
-		       - velocity(string): velocity of the queried train.
-		       - time(string): time of the last location update.
+                       - longitude(string): longitude value of the train.
+                       - velocity(string): velocity of the queried train.
+                       - time(string): time of the last location update.
              - destinationCordinate(string): Coordinate of destination station.
              - direction(string) : information of direction of the queried train between two nearest stations.
 
@@ -153,11 +154,11 @@
 
 	*Response JSON object:*
 
-	       - trainName(string): Name of the queried train.
+               - trainName(string): Name of the queried train.
                - latitude(string): latitude value of the train.
-	       - longitude(string): longitude value of the train.
-	       - velocity(string): velocity of the queried train.
-	       - time(string): time of the last location update.
+               - longitude(string): longitude value of the train.
+               - velocity(string): velocity of the queried train.
+               - time(string): time of the last location update.
 
 	    
 ## Database Builder API :
