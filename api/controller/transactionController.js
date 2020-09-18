@@ -5,7 +5,7 @@ const authModel=require('../model/AuthenticationModel');
 spendCoinDataController =(req,res,next)=>{
     const uid=req.body.uid
     
-    var coin=String(new authModel.AuthenticaltionModel().spendCoinData(uid)) ; 
+    var coin=new authModel.AuthenticaltionModel().spendCoinData(uid) ; 
 
     res.status(201).json({
         message:'1 User coin data spent successfully.\n Your current coin amount is:'+coin,
