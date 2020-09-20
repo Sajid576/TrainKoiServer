@@ -77,17 +77,17 @@ mergeLists=(flag,mainlist,upcomingList)=>
 // this method generate a list of coordinates from path list . 
 function convertPathToCoordinateList(trainData,path,nearestList)
 {
-    console.log('convertPathToCoordinate called:  '+nearestList)
+    //console.log('convertPathToCoordinate called:  '+nearestList)
     coordinatesMap=new myDb.ReadData().fetchNodesToCoordinatesMap();
 
     console.log("[0]: "+ nearestList[0]);
-    console.log("[1]: "+nearestList[nearestList.length-1]);
+    console.log("[n-1]: "+nearestList[nearestList.length-1]);
 
     var coord= trainData['latitude']+','+trainData['longitude'];
     mainlist=[];
     var flag=indicateRouteCoordinate(coord,nearestList[0],nearestList[nearestList.length-1]);
     mergeLists(flag,mainlist,nearestList);
-    
+    console.log("length:  "+mainlist.length)
 
 
     for(var i=1;i<path.length-1;i++)
