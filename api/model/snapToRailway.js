@@ -22,13 +22,14 @@ indicateRouteCoordinate=(coord,first,last)=>
         starting_lon = first.split(',')[1];
         ending_lat   = last.split(',')[0];
         ending_lon   = last.split(',')[1];
+       /*
         console.log(x);
         console.log(y);
         console.log(starting_lat);
         console.log(starting_lon);
         console.log(ending_lat);
         console.log(ending_lon);
-
+*/
 
         d1=haversine.getDistance(Number(x),Number(y),Number(starting_lat),Number(starting_lon));
         d2=haversine.getDistance(Number(x),Number(y),Number(ending_lat),Number(ending_lon));
@@ -39,12 +40,17 @@ indicateRouteCoordinate=(coord,first,last)=>
          *  1 denote the first index of upcoming list.
          *  2 denote the last index of upcoming list.
          */
+        console.log("d1: "+d1);
+        console.log("d2: "+d2);
+
         if(d1>d2)
         {
+            console.log("--->1")
             return 1;
         }
         else
         {
+            console.log("--->2")
             return 2;
         }
 }
@@ -73,6 +79,9 @@ function convertPathToCoordinateList(trainData,path,nearestList)
 {
     console.log('convertPathToCoordinate called:  '+nearestList)
     coordinatesMap=new myDb.ReadData().fetchNodesToCoordinatesMap();
+
+    console.log("[0]: "+ nearestList[0]);
+    console.log("[1]: "+nearestList[nearestList.length-1]);
 
     var coord= trainData['latitude']+','+trainData['longitude'];
     mainlist=[];
