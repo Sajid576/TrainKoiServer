@@ -96,12 +96,14 @@ function convertPathToCoordinateList(trainData,path,nearestList)
         var Rev_edge=path[i+1]+","+path[i];
         if(coordinatesMap.has(edge))
         {
+            console.log("edge: "+edge)
             var temp_list= coordinatesMap.get(edge);
             var flag=indicateRouteCoordinate(mainlist[mainlist.length-1],temp_list[0],temp_list[temp_list.length-1]);
             mergeLists(flag,mainlist,temp_list);
             
         }
         else{
+            console.log("rev_edge: "+Rev_edge)
             var temp_list= coordinatesMap.get(Rev_edge);
             var flag=indicateRouteCoordinate(mainlist[mainlist.length-1],temp_list[0],temp_list[temp_list.length-1]);
             mergeLists(flag,mainlist,temp_list);
