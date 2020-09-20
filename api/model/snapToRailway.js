@@ -40,17 +40,16 @@ indicateRouteCoordinate=(coord,first,last)=>
          *  1 denote the first index of upcoming list.
          *  2 denote the last index of upcoming list.
          */
-        console.log("d1: "+d1);
-        console.log("d2: "+d2);
+        
 
         if(d1>d2)
         {
-            console.log("--->1")
+            
             return 1;
         }
         else
         {
-            console.log("--->2")
+            
             return 2;
         }
 }
@@ -65,6 +64,7 @@ mergeLists=(flag,mainlist,upcomingList)=>
     if(flag==1)
     {
         mainlist.push.apply(mainlist,upcomingList);
+        console.log("flag: "+flag);
     }
     else 
     {
@@ -87,7 +87,7 @@ function convertPathToCoordinateList(trainData,path,nearestList)
     mainlist=[];
     var flag=indicateRouteCoordinate(coord,nearestList[0],nearestList[nearestList.length-1]);
     mergeLists(flag,mainlist,nearestList);
-    console.log("length:  "+mainlist.length)
+    
 
 
     for(var i=1;i<path.length-1;i++)
@@ -100,13 +100,16 @@ function convertPathToCoordinateList(trainData,path,nearestList)
             var temp_list= coordinatesMap.get(edge);
             var flag=indicateRouteCoordinate(mainlist[mainlist.length-1],temp_list[0],temp_list[temp_list.length-1]);
             mergeLists(flag,mainlist,temp_list);
-            
+            console.log("[0]: "+ nearestList[0]);
+            console.log("[n-1]: "+nearestList[nearestList.length-1]);
         }
         else{
             console.log("rev_edge: "+Rev_edge)
             var temp_list= coordinatesMap.get(Rev_edge);
             var flag=indicateRouteCoordinate(mainlist[mainlist.length-1],temp_list[0],temp_list[temp_list.length-1]);
             mergeLists(flag,mainlist,temp_list);
+            console.log("[0]: "+ nearestList[0]);
+            console.log("[n-1]: "+nearestList[nearestList.length-1]);
         }
 
     }
