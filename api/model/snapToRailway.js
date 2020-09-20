@@ -16,12 +16,12 @@ module.exports={
  */
 indicateRouteCoordinate=(coord,first,last)=>
 {
-            x        = coord.split(',');
-            y        = coord.split(',');
-        starting_lat = first.split(',');
-        starting_lon = first.split(',');
-        ending_lat   = last.split(',');
-        ending_lon   = last.split(',');
+            x        = coord.split(',')[0];
+            y        = coord.split(',')[1];
+        starting_lat = first.split(',')[0];
+        starting_lon = first.split(',')[1];
+        ending_lat   = last.split(',')[0];
+        ending_lon   = last.split(',')[1];
         console.log(x);
         console.log(y);
         console.log(starting_lat);
