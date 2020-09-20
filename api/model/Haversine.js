@@ -1,5 +1,5 @@
 
-
+//used to calculate distance between two coordinates
 getDistance=function(train_lat,train_lon,lat,lon)
 {
       

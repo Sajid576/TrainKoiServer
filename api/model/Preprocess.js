@@ -1,16 +1,22 @@
 haversine=require('./Haversine');
 myDb=require('./readData');
 
+//this class do some pre processing task before initiating Dijkstra algorithm
 class Preprocess{
-
+    //this list stores the coordinates that are nearest to the train
     nearestList=[];
+    //this variable store the index number that store the nearest coordinate to train
     nearestListIndex;
     
-    
+    //it holds node number which is one of two nearest nodes
     node1;
     node2;
+
+    //this variable holds the distance between train and one of two nearest nodes
     first_portion_distance=0;
+    //this variable holds the coordinates between train and one of two nearest nodes
     first_portion_list=[];
+    
     last_portion_distance=0;
     last_portion_list=[];
 
@@ -52,7 +58,7 @@ class Preprocess{
 
 
     //this method used to verify the node of two endpoints of the nearestList
-    // Exception: it can throw null pointer if 
+    // Exception: it can throw null pointer if station/junction not found
     verifyNodePoint(cord1,cord2)
     {
         var CoordinateToStation=new myDb.ReadData().fetchCoordinateToStation();
@@ -65,7 +71,8 @@ class Preprocess{
 
     }
 
-    //this method used to divide the nearestList into two list at the point of nearestListIndex
+    //this method used to divide the nearestList into two list keeping nearestListIndex
+    //in the middle. 
     divideList()
     {
         this.verifyNodePoint(this.nearestList[0],this.nearestList[this.nearestList.length-1]);

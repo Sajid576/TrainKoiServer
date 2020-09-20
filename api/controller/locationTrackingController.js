@@ -1,7 +1,8 @@
 locationData=require('../model/TrainLocationData');
 
 
-
+//this function used to handle POST requests to store a particular train location data
+// into the server.  
 storeNewLocationData =(req,res,next)=>{
     const trainName=req.body.trainName;
     const lat= req.body.latitude;

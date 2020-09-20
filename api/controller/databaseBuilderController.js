@@ -1,6 +1,7 @@
 fileModel=require('../model/DatabaseBuilderModule/FileModel');
 dbTrainsModel=require('../model/DatabaseBuilder');
 
+//this function used to handle the POST requests to build the database of trains
 buildTrainDatabase=(req,res,next)=>{
     dbTrainsModel.DatabaseBuilder.setLocationsData()
     .then(()=>{
@@ -16,7 +17,7 @@ buildTrainDatabase=(req,res,next)=>{
     });
 
 }
-
+//this function used to handle the POST requests to build the whole database from datasets
 buildDatabase =(req,res,next)=>{
     
     var fModel= new fileModel.FileModel();

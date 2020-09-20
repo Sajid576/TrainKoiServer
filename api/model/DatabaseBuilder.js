@@ -2,7 +2,7 @@
 var firebase = require('./FirebaseConnection');
 var trainData=require('./DatabaseBuilderModule/TrainData/TrainList')
 //this class used for building the firebase cloud firestore database by storing  the collected 
-//data from text files
+//data in a organized way from text files
 class DatabaseBuilder{
 
     constructor(station_junction_list,nodeToGeneratedCoordinateMap,nodeTonodeDistMap)
@@ -37,7 +37,8 @@ class DatabaseBuilder{
     
     }
 
-
+    //this function will be used to assist the 'storeNodeToCoordinateData' method to store 
+    //nodePair mapping with coordinateList into firebase cloud firestore
     setNodeToCoordinateData(nodeToGeneratedCoordinateMap)
     {
         for (let [key, value] of nodeToGeneratedCoordinateMap) 
@@ -46,7 +47,8 @@ class DatabaseBuilder{
         }
     }
 
-    //this function will be used to store nodePair mapping with coordinateList
+    //this function will be used to store nodePair mapping with coordinateList into 
+    //firebase cloud firestore
     storeNodeToCoordinateData(nodePair,coordinateList)
     {
         const usersCollection = firebase.firestore().collection('NodeToCoordinate');
@@ -62,14 +64,18 @@ class DatabaseBuilder{
             console.error(error)
         });
     }
-
+    
+    
+    //this function used to assist the 'storeNodeToNodeDistanceData' method to store 
+    //the distance between every node pair to the firebase cloud firestore
     setNodeToNodeDistanceData(nodePairTodistanceMap)
     {
         var nodePairTodistanceObj= Object.fromEntries(nodePairTodistanceMap);
         this.storeNodeToNodeDistanceData(nodePairTodistanceObj);
 
     }
-    // 1,2 : 5.5km
+    //this function used to store distance between every node pair to the firebase cloud firestore
+    //E.g-  1,2 : 5.5km
     storeNodeToNodeDistanceData(nodePairTodistanceMap)
     {
         
@@ -87,7 +93,8 @@ class DatabaseBuilder{
             });
     }
 
-
+    // Used to assist 'storeNodeToStationData' & 'storeStationToCoordinateData'  method
+    //to store data 
     setNodeToStationData_AND_stationToCoordinateData(station_junction_list)
     {
         var NodeToStationMappingData=new Map();
@@ -107,7 +114,9 @@ class DatabaseBuilder{
         this.storeStationToCoordinateData(StationToCoordinateObj);
     }
 
-    //1 : "kamlapur"
+    //Used to store Station/junction name mapping with the corresponding nodes in firebase
+    //cloud firestore. 
+    //E.g-   1 : "kamlapur"
     storeNodeToStationData(nodeToStationNameMap)
     {
         
@@ -125,7 +134,8 @@ class DatabaseBuilder{
             });
     }
 
-    // kamlapur : "23.322322,90.232326"
+    //Used to store Coordinate value mapping with the station/junction name in firebase firestore
+    //E.g-  kamlapur : "23.322322,90.232326"
     storeStationToCoordinateData(stationNameToGeoData)
     {
         const usersCollection = firebase.firestore().collection('StationToCoordinate');

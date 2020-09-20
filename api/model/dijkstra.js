@@ -1,10 +1,14 @@
 priorityqueue=require('./PriorityQueue');
 
+//this class used to generate path between station and train using dijkstra algorithm
 class Graph{
+    //this variable used to store all node number 
     nodes=[];
+    //used to store adjacent nodes of a particular node
     edges=new Map();
-
+    //used to store the generated path from source to destination
     path=[];
+    //used to store the total distance from source to destination
     total_distances;
 
     constructor(nodeTonodeDistance,preprocess)
@@ -36,7 +40,7 @@ class Graph{
             console.log(key+"--"+JSON.stringify(value))
         }*/
     }
-    //this method used build the realtime bidirected adjacency list 
+    //this method used to build the  bidirected adjacency list 
     setBidirectedAdjacent(u,v,wt)
     {
         var temp={
@@ -58,7 +62,7 @@ class Graph{
         this.edges.set(v,temp_list1);
 
     }
-    //this method returns the computed shortest distance in KM
+    //this method returns the computed total distance(source->destination) in KM
     getShortestDistance()
     {
         return this.total_distances;
@@ -69,11 +73,12 @@ class Graph{
         return this.path;
     }
 
+    //set the distance in KM
     setDestinationDistance(distances,destinationNode)
     {
-        this.total_distances= distances[destinationNode];//set the distance in KM
+        this.total_distances= distances[destinationNode];
     }
-    
+    //set the generated path 
     setDestinationPath(prev,i)
     {
         
@@ -88,12 +93,13 @@ class Graph{
         this.path.push(i);
 
     }
-
+    //used to add node number in the nodes list
     addNode(node)
     {
         this.nodes.push(node);
     }
 
+    //used to initiate Dijkstra algorithm on the generated graph
     initDjikstraAlgorithm(startNode,destinationNode) {
         let distances = {};
      

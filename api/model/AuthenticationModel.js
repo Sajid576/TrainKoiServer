@@ -42,7 +42,7 @@ async storeUserData(uid,username,email,phone)
    })
    
 }
-//this method used for storing edited user data after edited by the user
+//this method used for storing edited user data
 async  editUserData(uid,username,phone)
 {
     //this code used for storing the user data into the server variables
@@ -62,7 +62,7 @@ async  editUserData(uid,username,phone)
 }
 
 
-//this method used for loading all users data to server from cloud firestore on server startup
+//For loading all users data to server from cloud firestore on start of a server 
 readUserDataFromDb()
 {
     const query = firebase.firestore().collection('Users').get();
@@ -97,13 +97,13 @@ readUserDataFromDb()
     
     
 }
-//this method used to fetch data from server to client side
+//Used to fetch a particular user data from server 
 readUserData(uid)
 { 
     var userInfo=AuthenticaltionModel.AllUsersData[uid];
     return userInfo;
 }
-
+//used to deduct the coin data of a particular user
 spendCoinData(uid)
 {
     var userInfo=this.readUserData(uid);
@@ -119,6 +119,7 @@ spendCoinData(uid)
 
 
 }
+//used to  add more coin data of a particular user
 addCoinData(uid,requestedCoin)
 {
     requestedCoin=Number(requestedCoin);

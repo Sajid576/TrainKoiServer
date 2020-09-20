@@ -8,6 +8,9 @@ module.exports={
     convertPathToCoordinateList
 }
 /**
+ * this function used to decide in which order(from last or from first) an upcoming list
+ *  will be merged to the mainlist.
+ * 
  * first denotes the (lat,lon) of the 1st index in the list
  * last denotes the (lat,lon) of the last index in the list
  * coord denotes 
@@ -55,7 +58,7 @@ indicateRouteCoordinate=(coord,first,last)=>
 }
 /**
  * this mergeLists method merge the mainlist with the upcoming list(the lists that are 
- * generating from the nodePair ) according to the   
+ * generating from the nodePair )   
  * 
  */
 mergeLists=(flag,mainlist,upcomingList)=>
@@ -74,7 +77,7 @@ mergeLists=(flag,mainlist,upcomingList)=>
         }
     }
 }
-// this method generate a list of coordinates from path list . 
+// this method generate a list of coordinates from generated path list from Dijkstra . 
 function convertPathToCoordinateList(trainData,path,nearestList)
 {
     //console.log('convertPathToCoordinate called:  '+nearestList)
