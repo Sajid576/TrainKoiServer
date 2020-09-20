@@ -22,6 +22,13 @@ indicateRouteCoordinate=(coord,first,last)=>
         starting_lon = first.split(',');
         ending_lat   = last.split(',');
         ending_lon   = last.split(',');
+        console.log(x);
+        console.log(y);
+        console.log(starting_lat);
+        console.log(starting_lon);
+        console.log(ending_lat);
+        console.log(ending_lon);
+
 
         d1=haversine.getDistance(Number(x),Number(y),Number(starting_lat),Number(starting_lon));
         d2=haversine.getDistance(Number(x),Number(y),Number(ending_lat),Number(ending_lon));
@@ -64,7 +71,7 @@ mergeLists=(flag,mainlist,upcomingList)=>
 // this method generate a list of coordinates from path list . 
 function convertPathToCoordinateList(trainData,path,nearestList)
 {
-    //console.log('convertPathToCoordinate called:  '+nearestList)
+    console.log('convertPathToCoordinate called:  '+nearestList)
     coordinatesMap=new myDb.ReadData().fetchNodesToCoordinatesMap();
 
     var coord= trainData['latitude']+','+trainData['longitude'];

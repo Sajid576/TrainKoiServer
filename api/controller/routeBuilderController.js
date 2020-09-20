@@ -30,11 +30,13 @@ drawRouteController =(req,res,next)=>{
     serviceNo=req.params.serviceNo;
     if(serviceNo=='2')
     {
+        
         var trainData= locationData.fetchTrainLoction(trainName);
         res.status(200).json({
             message:'Getting the data of the requested train',
             traindata:trainData
         })
+
     }
     //route between train & starting station
     else if(serviceNo=='1')
