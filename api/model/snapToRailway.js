@@ -91,6 +91,8 @@ function convertPathToCoordinateList(trainData,path,nearestList)
     var flag=indicateRouteCoordinate(coord,nearestList[0],nearestList[nearestList.length-1]);
     mergeLists(flag,mainlist,nearestList);
     
+    console.log("[0]: "+ mainlist[0]);
+    console.log("[n-1]: "+mainlist[mainlist.length-1]);
 
 
     for(var i=1;i<path.length-1;i++)
@@ -103,16 +105,18 @@ function convertPathToCoordinateList(trainData,path,nearestList)
             var temp_list= coordinatesMap.get(edge);
             var flag=indicateRouteCoordinate(mainlist[mainlist.length-1],temp_list[0],temp_list[temp_list.length-1]);
             mergeLists(flag,mainlist,temp_list);
-            console.log("[0]: "+ nearestList[0]);
-            console.log("[n-1]: "+nearestList[nearestList.length-1]);
+            
+            console.log("[0]: "+ mainlist[0]);
+            console.log("[n-1]: "+mainlist[mainlist.length-1]);
         }
         else{
             console.log("rev_edge: "+Rev_edge)
             var temp_list= coordinatesMap.get(Rev_edge);
             var flag=indicateRouteCoordinate(mainlist[mainlist.length-1],temp_list[0],temp_list[temp_list.length-1]);
             mergeLists(flag,mainlist,temp_list);
-            console.log("[0]: "+ nearestList[0]);
-            console.log("[n-1]: "+nearestList[nearestList.length-1]);
+            
+            console.log("[0]: "+ mainlist[0]);
+            console.log("[n-1]: "+mainlist[mainlist.length-1]);
         }
 
     }
