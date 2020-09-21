@@ -21,10 +21,11 @@ class DatabaseBuilder{
         trains.forEach(train=>{
             list.push({
                 "trainName":train,
-                "latitude":"23.323232",
-                "longitude":"90.242242",
+                "latitude":"24.025470",
+                "longitude":"90.391446",
                 "time":"null",
-                "velocity":"3"
+                "velocity":"3",
+                
             });
 
         })

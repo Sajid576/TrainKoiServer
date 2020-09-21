@@ -32,9 +32,18 @@ drawRouteController =(req,res,next)=>{
     {
         
         var trainData= locationData.fetchTrainLoction(trainName);
+        var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
+
+        var node1=preprocess.getNode1();
+        var node2=preprocess.getNode2();
+        var station_junction_name1= new myDatabase.ReadData().fetchNodeTostation(node1);
+        var station_junction_name2= new myDatabase.ReadData().fetchNodeTostation(node2);
+        var nearestStation_junction=  station_junction_name1+'-'+station_junction_name2;
+
         res.status(200).json({
             message:'Getting the data of the requested train',
-            traindata:trainData
+            traindata:trainData,
+            nearestStation_junction
         })
 
     }

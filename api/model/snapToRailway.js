@@ -124,7 +124,7 @@ function convertPathToCoordinateList(trainData,path,nearestList)
 
 }
 
-// this method will generate 'nearestNodeTrackerMap' that wil be used find 4 nearest nodes so that we can 
+// this method will generate 'nearestNodeTrackerMap' that wil be used to find 4 nearest nodes so that we can 
 // easily fetch their corresponding 3 lists from database
 function nearestNodesFinder(x,y)
 {

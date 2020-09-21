@@ -135,6 +135,15 @@ addCoinData(uid,requestedCoin)
     return coin;
 
 }
+//used to update the coin amount in the firebase cloud firestore database.
+async updateCoinInDb(uid,coins)
+{
+    const usersCollection = firebase.firestore().collection('Users');
+    usersCollection.doc(uid).set({
+       coins:coins
+   }, {merge: true})
+
+}
 
 }
 

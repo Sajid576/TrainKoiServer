@@ -44,7 +44,7 @@ loadServerDb()
     this.readStationToCoordinate();
 }
 
-//this function fetches all lists of coordinates 
+//this function fetches all lists of coordinates mapping with nodePair
 readAllNodeToCoordinateData()
 {
    
@@ -73,6 +73,7 @@ readAllNodeToCoordinateData()
    });
  }
 
+//Used to fetch distances mapping with nodePair
 readNodeToNodeDistance()
 {
     const query = firebase.firestore().collection('NodeToNodeDistance').doc('distance(km)');
@@ -105,6 +106,7 @@ readNodeToNodeDistance()
       console.error(error);
     });
 }
+//Used to fetch all stations mapping with their corresponding nodes
 readNodeToStation()
 {
     const query = firebase.firestore().collection('NodeToStation').doc('mapping');
@@ -133,7 +135,7 @@ readNodeToStation()
       console.error(error);
     });
 }
-
+// used to read the coordinate value with their corresponding stations/junction
 readStationToCoordinate()
 {
     const query = firebase.firestore().collection('StationToCoordinate').doc('mapping');
@@ -166,7 +168,7 @@ readStationToCoordinate()
 }
 
 
-
+//used to fetch data from server variables upon requests
 fetchNodesToCoordinatesMap()
 {
     return ReadData.nodesToCoordinatesMap;
