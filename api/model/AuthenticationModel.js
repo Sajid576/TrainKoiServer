@@ -109,7 +109,7 @@ spendCoinData(uid)
     var userInfo=this.readUserData(uid);
     var coin=Number(userInfo['coins']);
     coin-=1;
-    userInfo['coins']=String(coin);
+    userInfo['coins']=coin;
     AuthenticaltionModel.AllUsersData[uid]=userInfo;
 
 
