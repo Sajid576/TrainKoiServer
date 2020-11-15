@@ -1,7 +1,15 @@
 
+## Project Architecture
+
+TrainKoi is a realtime train location tracking android application of Bangladesh.It is composed of a frontent and backend side.This is the repository of backend side which is made with Javascript language and Express framework in Nodejs runtime.
+This server is used for handling(read/write) user inforamtion , tracking realtime location of all the trains, finding the required distance from train to station using
+graph algorithm(Dijkstra) , calculating estimated distance using mathematics,physics and Machine learning.
+This server is also used for building the firebase cloud firestore database where all the static coordinates of railway are safely stored in more sorted and organized way.
+
 
 ## Prequisities
-- Download & install NodeJS latest version and NPM in your system[From Here](https://nodejs.org/en/download/ )
+- Download & install NodeJS latest version and NPM in your system [From Here](https://nodejs.org/en/download/ )
+- Install MongoDB . 
   
   
 
