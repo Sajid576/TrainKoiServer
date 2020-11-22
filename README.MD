@@ -26,11 +26,12 @@ $ npm install
 ```
 $ npm start   
 ```
-Your server should be available at PORT 3000  .... :)
+Your server should be available at  ```localhost:3000 ``` .... :)
 
-
-
-
+- To test the specific module using  **jest** ,you need to go to ``test.js`` module in tests package and run the following command :
+```
+$ npm test
+```
 
 # TrainKoi Api Documentation 
 
@@ -117,7 +118,7 @@ Response JSON object:
 
 ## RailwayRouteMaker API :
 
-1) Draw Route on Google Map:
+1) Get required distance ,estimated time and draw route on Google Map:
 ```
 GET  routeBuilderApi/(string:trainName|string:startingStation|string:endingStation|string:serviceNo/
 ```     
