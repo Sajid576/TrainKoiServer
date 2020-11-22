@@ -53,6 +53,7 @@ readUserDataController =(req,res,next)=>{
     const uid=req.params.id;
     
     
+    
     var user=new AuthModel.AuthenticaltionModel().readUserData(uid);
     console.log("lel:: "+JSON.stringify(user));
     res.status(202).json({

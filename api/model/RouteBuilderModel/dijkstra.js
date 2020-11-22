@@ -29,6 +29,9 @@ class Graph{
             //console.log(start+','+end+'->'+value);
             this.setBidirectedAdjacent(start,end,value);   
         }
+
+        
+
         //set adjacent among '0' no. node with its nearest two nodes
         
         this.setBidirectedAdjacent('0',preprocess.getNode1(),preprocess.getFirstPortionDistance());

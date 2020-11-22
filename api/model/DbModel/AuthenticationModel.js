@@ -8,8 +8,8 @@ static AllUsersData={};
 
 constructor()
 {
-
-}
+    
+}   
 logger()
 {
     console.log("After modifying state of AllUsersData:  ");

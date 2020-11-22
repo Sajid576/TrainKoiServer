@@ -3,8 +3,10 @@ var moment = require('moment');
 var Avg_Intercity_speed=10;
 
 /**
+ * 
  * this method used to estimate time using s=vt ,or time=distance/velocity  formula.
- * distance is coming from dijkstra algortihm
+ * distance is coming from dijkstra algortihm.
+ * 
  */
 function estimateTime(distance,velocity)
 {
@@ -27,10 +29,19 @@ function estimateTime(distance,velocity)
         'time':time,
          'msg':msg,
     };
-    
+
     return timeInfo;
+
 }
 
 module.exports={
     estimateTime,
 }
+
+/**
+ * 
+ * input -->
+ * []
+ * 
+ * 
+ */

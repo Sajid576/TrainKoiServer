@@ -59,14 +59,18 @@ drawRouteController =(req,res,next)=>{
         var graph = new dijkstra.Graph(new myDatabase.ReadData().fetchNodeTonodeDistance(),preprocess);
         graph.initDjikstraAlgorithm("0",destinationNode);
         total_dist=graph.getShortestDistance();
+
         path=graph.getShortestPath();
 
         if(path[1]==preprocess.getNode1())
         {
+            
+            total_dist+=preprocess.getFirstPortionDistance();
             var coordinateList= snapToRailway.convertPathToCoordinateList(trainData,path,preprocess.getFirstPortionList());
         }
         else
         {
+            total_dist+=preprocess.getLastPortionDistance();
             var coordinateList= snapToRailway.convertPathToCoordinateList(trainData,path,preprocess.getLastPortionList());
         }
         var estimatedTime=timeEstimator.estimateTime(Number(total_dist),Number(trainData['velocity']));
@@ -98,10 +102,12 @@ drawRouteController =(req,res,next)=>{
 
         if(path[1]==preprocess.getNode1())
         {
+            total_dist+=preprocess.getFirstPortionDistance();
             var coordinateList= snapToRailway.convertPathToCoordinateList(trainData,path,preprocess.getFirstPortionList());
         }
         else
         {
+            total_dist+=preprocess.getLastPortionDistance();
             var coordinateList= snapToRailway.convertPathToCoordinateList(trainData,path,preprocess.getLastPortionList());
         }
         var estimatedTimeInfoObj=timeEstimator.estimateTime(Number(total_dist),Number(trainData['velocity']));

@@ -156,7 +156,7 @@ function nearestNodesFinder(x,y)
     }
     //console.log(nearestNodeTrackerMap.printCollection());
 
-     /* From the nearestNodeTrackerMap we will extract top 3 Station/junction to check at least 2 lists
+     /* From the nearestNodeTrackerMap we will extract top 4 Station/junction to check at least 3 lists
              to determine in which track train is situated */
 
     station_junction_one = nearestNodeTrackerMap.front()[0];

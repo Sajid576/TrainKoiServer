@@ -107,8 +107,6 @@ class FileModel{
                         
                     }
                     
-                    
-                    
                     var coordinates=[];
                     var k=i+1;
                     if(k==lines.length)break;
@@ -116,9 +114,7 @@ class FileModel{
                     {
                         var str=lines[k].split(",");
                         if(str[0]=='#')break;
-                        coordinates.push(lines[k].trim());
-                        
-                        
+                        coordinates.push(lines[k].trim());     
                         k++;
                     }
                     //console.log(coordinates);
