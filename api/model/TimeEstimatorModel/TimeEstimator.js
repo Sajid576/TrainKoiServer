@@ -22,7 +22,7 @@ function estimateTime(distance,velocity)
     distance=distance.toFixed(2);
 
     time=distance/velocity;  //time (seconds)
-
+    console.log(time);
     var msg= moment.unix(time).utc().format('H [ঘণ্টা,] m [মিনিট ] s [সেকেন্ড]')
     
     var timeInfo={
