@@ -1,7 +1,7 @@
 var fs = require('fs');
 const dbBuilder = require('../DatabaseBuilder');
 math=require('./Math');
-haversine=require('../Haversine');
+haversine=require('../RouteBuilderModel/Haversine');
 
 class FileModel{
 

@@ -35,18 +35,29 @@
  * 
  * CrowdSourcingModel={
  *       "trainName":[
- *                    "unique-string":{
- *                                    "coordinate":"23.2324242,90.2324221",
- *                                    "velocity":6,
- *                                    "acceleration":1,
- *                                    "time":"23:11:45",
- *                                     "date":"21/11/20",
- *                                     "day":"sun",
- *                                     "edge":"2,3"
+ *                    "unique-string":[
+ *                                    {
+    *                                    "coordinate":"23.2324242,90.2324221",
+    *                                    "velocity":6,
+    *                                    "acceleration":1,
+    *                                    "time":"23:11:45",
+    *                                     "date":"21/11/20",
+    *                                     "day":"sun",
+    *                                     "edge":"2,3"
  *                                      },
- *                    "unique-string":{
+ *                                     {
+    *                                    "coordinate":"23.2324250,90.2324267",
+    *                                    "velocity":6,
+    *                                    "acceleration":1,
+    *                                    "time":"23:11:45",
+    *                                     "date":"21/11/20",
+    *                                     "day":"sun",
+    *                                     "edge":"2,3"
+ *                                      },
+ *                                  ],
+ *                   "unique-string":[
  *                                    ..........
- *                                      },
+ *                                    ],
  *                    ..........
  * 
  *                   ]     

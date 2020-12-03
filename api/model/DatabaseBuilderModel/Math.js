@@ -1,4 +1,4 @@
-haversine=require('../Haversine');
+haversine=require('../RouteBuilderModel/Haversine');
 
 class Point{
      x;

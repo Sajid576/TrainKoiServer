@@ -1,4 +1,4 @@
-const AuthModel = require('../model/AuthenticationModel');
+const AuthModel = require('../model/DbModel/AuthenticationModel');
 
 
 

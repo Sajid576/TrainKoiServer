@@ -1,6 +1,6 @@
  
 var firebase = require('../DbModel/FirebaseConnection');
-var trainData=require('./DatabaseBuilderModule/TrainData/TrainList')
+var trainData=require('./TrainData/TrainList');
 //this class used for building the firebase cloud firestore database by storing  the collected 
 //data in a organized way from text files
 class DatabaseBuilder{

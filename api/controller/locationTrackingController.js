@@ -1,4 +1,4 @@
-locationData=require('../model/TrainLocationData');
+locationData=require('../model/CrowdSourcingModel/TrainLocationData');
 
 
 //this function used to handle POST requests to store a particular train location data

@@ -1,4 +1,4 @@
-const authModel=require('../model/AuthenticationModel');
+const authModel=require('../model/DbModel/AuthenticationModel');
 
 
 //PUT: this method used to deduct the coin data of a particular user and send a response

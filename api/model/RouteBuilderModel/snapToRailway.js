@@ -1,4 +1,4 @@
-myDb=require('./readData');
+myDb=require('../DbModel/readData');
 priorityqueue=require('./PriorityQueue');
 haversine=require('./Haversine');
 preprocess=require('./Preprocess');

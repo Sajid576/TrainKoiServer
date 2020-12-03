@@ -1,5 +1,5 @@
-fileModel=require('../model/DatabaseBuilderModule/FileModel');
-dbTrainsModel=require('../model/DatabaseBuilder');
+fileModel=require('../model/DatabaseBuilderModel/FileModel');
+dbTrainsModel=require('../model/DatabaseBuilderModel/DatabaseBuilder');
 
 
 //this function used to handle the POST requests to build the database of trains

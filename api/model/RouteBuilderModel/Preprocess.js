@@ -1,5 +1,5 @@
 haversine=require('./Haversine');
-myDb=require('./readData');
+myDb=require('../DbModel/readData');
 
 //this class do some pre processing task before initiating Dijkstra algorithm
 class Preprocess{

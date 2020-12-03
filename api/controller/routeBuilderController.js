@@ -1,9 +1,9 @@
-const dijkstra = require('../model/dijkstra');
+const dijkstra = require('../model/RouteBuilderModel/dijkstra');
 
-myDatabase=require('../model/readData');
-locationData=require('../model/TrainLocationData');
-snapToRailway=require('../model/snapToRailway');
-timeEstimator=require('../model/TimeEstimator');
+myDatabase=require('../model/DbModel/readData');
+locationData=require('../model/CrowdSourcingModel/TrainLocationData');
+snapToRailway=require('../model/RouteBuilderModel/snapToRailway');
+timeEstimator=require('../model/TimeEstimatorModel/TimeEstimator');
 
 //Get request for drawing black lines on the google map
 drawRailwayTracksController =(req,res,next)=>{
