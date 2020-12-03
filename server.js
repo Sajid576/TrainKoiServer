@@ -2,9 +2,9 @@ const http = require('http');
 const express = require('express');
 const app = express();
 
-const loadServer=require('./api/model/readData');
-const loadUserData=require('./api/model/AuthenticationModel');
-const loadTrainData=require('./api/model/TrainLocationData');
+const loadServer=require('./api/model/DbModel/readData');
+const loadUserData=require('./api/model/DbModel/AuthenticationModel');
+const loadTrainData=require('./api/model/CrowdSourcingModel/TrainLocationData');
 
 var morgan = require('morgan')
 app.use(morgan('dev'))
