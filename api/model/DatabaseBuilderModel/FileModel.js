@@ -1,5 +1,5 @@
 var fs = require('fs');
-const dbBuilder = require('../DatabaseBuilder');
+const dbBuilder = require('./DatabaseBuilder');
 math=require('./Math');
 haversine=require('../RouteBuilderModel/Haversine');
 

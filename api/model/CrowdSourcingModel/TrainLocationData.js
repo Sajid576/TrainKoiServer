@@ -55,9 +55,9 @@ function fetchTrainLoction(TrainName)
 }
 
 //this function will be used to update the information of all the trains in real time in server
-function storeTrainLocation(TrainName,TrainData)
+function storeTrainLocation(trainLocationModel)
 {
-    TrainLocationData[TrainName]=TrainData;
+    TrainLocationData[trainLocationModel.getTrainName()]=trainLocationModel.getJsonTrainData();
     console.log(TrainLocationData);
     
 }
