@@ -1,4 +1,4 @@
-var firebase = require('./FirebaseConnection');
+var firebase = require('../DbModel/FirebaseConnection');
 
 //this variable holds the information of all the trains
 var TrainLocationData={};
