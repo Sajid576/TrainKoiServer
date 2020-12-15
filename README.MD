@@ -93,11 +93,11 @@ PUT transactionApi/users/spend
 ```
 ``` 
 Request JSON object:
-      - uid(string): A unique user id.
+    - uid(string): A unique user id.
       
 Response JSON object:
-      - message(string): successful
-      - coins(Number):total amount of coin of a particular user
+    - message(string): successful
+    - coins(Number):total amount of coin of a particular user
 
 ```
 
@@ -108,11 +108,11 @@ PUT transactionApi/users/add
 ```
 Request JSON object:
 	- uid(string): A unique user id.
-        - requestedCoins(string): The amount coins a particular user want to add.
+    - requestedCoins(string): The amount coins a particular user want to add.
 
 Response JSON object:
-             - message(string): successful
-             - coins(Number):total amount of coin of a particular user
+    - message(string): successful
+    - coins(Number): Total amount of coin of a particular user
 
 ```
 
