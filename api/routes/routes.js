@@ -3,6 +3,7 @@ const authRoute=require('./AuthenticationApi');
 const transactionRoute=require('./TransactionApi');
 const locationTrackingRoute=require('./locationTrackingApi');
 const databaseBuilderRoute=require('./DatabaseBuilderApi');
+const contactApiRoute=require('./contactApiRoute');
 
 const routes=[
     {
@@ -24,6 +25,10 @@ const routes=[
     {
         path: '/databaseBuilderApi',
         handler: databaseBuilderRoute
+    },
+    {
+        path:'/contactApi',
+        handler: contactApiRoute
     },
     {
         path: '/',

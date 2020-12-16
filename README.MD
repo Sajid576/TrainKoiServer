@@ -155,7 +155,30 @@ Response JSON object:
                - time(string): time of the last location update.
 
 ```
-	    
+## Contact API:
+1) used to send a contact data from client to server
+
+```
+POST  contactApi/storeUserContactData
+```
+```
+Request JSON object:
+    - uid(string): A unique user id.
+    - username(string):A name choosen by the user.
+    - email(string): User email.
+    - subject(string): A subject of the contact
+    - message(string): A message of the contact
+
+Response JSON object:
+    - _id(string): A unique id of the contact
+    - uid(string): A unique user id.
+    - username(string):A name choosen by the user.
+    - email(string): User email.
+    - subject(string): A subject of the contact
+    - message(string): A message of the contact
+    - createdAt(string): Date and time of creating contact
+
+
 ## Database Builder API :
 1) Database builder request: (this request will be for building the database using the data of text files):
 ```
