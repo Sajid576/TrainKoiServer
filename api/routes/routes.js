@@ -1,5 +1,5 @@
 const railwayRouteBuilderRoute=require('./routeBuilderApi');
-const authRoute=require('./AuthenticationApi');
+const userDataRoute=require('./UserDataRoute');
 const transactionRoute=require('./TransactionApi');
 const locationTrackingRoute=require('./locationTrackingApi');
 const databaseBuilderRoute=require('./DatabaseBuilderApi');
@@ -11,8 +11,8 @@ const routes=[
         handler: railwayRouteBuilderRoute
     },
     {
-        path: '/authenticationApi',
-        handler: authRoute
+        path: '/userDataApi',
+        handler: userDataRoute
     },
     {
         path: '/transactionApi',

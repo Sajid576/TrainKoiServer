@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 
-const userDataController=require('../controller/userDataController');
+const userDataController=require('../controller/UserController');
 
 
 //store user data

@@ -36,43 +36,49 @@ $ npm test
 # TrainKoi Api Documentation 
 
 
-## Authentication API :
+## UserData API :
 
 1) Request for storing user data after signUp:
 ```
-POST   authenticationApi/users  
+POST   userDataApi/users  
 ```
 ```
 Request JSON object: 
 
-    - uid(string): A unique user id.
+    - _id(string): A unique user id.
     - username(string):A name choosen by the user.
     - email(string): User email.
     - phone(string): User mobile number.
   
 Response JSON object:
-    - message(string): successful
-
+    - _id(string): A unique user id.
+    - username(string):A name choosen by the user.
+    - email(string): User email.
+    - phone(string): User mobile number.
+    - coins(Number): Total amount of coin of a particular user
 ```
 
 2) Request for storing user data after edit:
 ```
- PUT authenticationApi/users/edit   
+ PUT userDataApi/users/edit   
 ```
 ```
 Request JSON object:
-    - uid(string): A unique user id.
+    - _id(string): A unique user id.
     - username(string):A name choosen by the user.
     - phone(string): User mobile number.
 
 Response JSON object:
-     - message(string): successful
-
+    - _id(string): A unique user id.
+    - username(string):A name choosen by the user.
+    - email(string): User email.
+    - phone(string): User mobile number.
+    - coins(Number): Total amount of coin of a particular user
 ```
 
 3) User data fetch:
 ```
-GET  authenticationApi/users/read/(string:id)
+GET  userDataApi/users/read/(string:id)
 ```
 ```
 Response JSON object:
@@ -81,7 +87,7 @@ Response JSON object:
       - username(string):A name choosen by the user.
       - email(string): User email.
       - phone(string): User mobile number.
-
+      - coins(Number): Total amount of coin of a particular user
 ```
 	  
 
@@ -93,10 +99,13 @@ PUT transactionApi/users/spend
 ```
 ``` 
 Request JSON object:
-    - uid(string): A unique user id.
+    - _id(string): A unique user id.
       
 Response JSON object:
-    - message(string): successful
+    - _id(string): A unique user id.
+    - username(string):A name choosen by the user.
+    - email(string): User email.
+    - phone(string): User mobile number.
     - coins(Number):total amount of coin of a particular user
 
 ```
@@ -107,11 +116,14 @@ PUT transactionApi/users/add
 ``` 
 ```
 Request JSON object:
-	- uid(string): A unique user id.
+	- _id(string): A unique user id.
     - requestedCoins(string): The amount coins a particular user want to add.
 
 Response JSON object:
-    - message(string): successful
+    - _id(string): A unique user id.
+    - username(string):A name choosen by the user.
+    - email(string): User email.
+    - phone(string): User mobile number.
     - coins(Number): Total amount of coin of a particular user
 
 ```

@@ -9,7 +9,7 @@ const URI='mongodb+srv://'+username+':'+password+'@cluster0.bemvw.mongodb.net/<'
 connectMongoDB=()=>{
 
     return new Promise((resolve, reject)=>{
-       mongoose.connect(URI, {useNewUrlParser: true,useUnifiedTopology: true}).then(()=>{
+       mongoose.connect(URI, {useNewUrlParser: true,useUnifiedTopology: true,useFindAndModify:false}).then(()=>{
          resolve('Connected successfully');
        }).catch((err)=>{
          reject(err);
