@@ -9,7 +9,7 @@ This server is also used for building the firebase cloud firestore database wher
 
 ## Prequisities
 - Download & install NodeJS latest version and NPM in your system [From Here](https://nodejs.org/en/download/ )
-- Install MongoDB . 
+
   
   
 
@@ -33,21 +33,25 @@ Your server should be available at  ```localhost:3000 ``` .... :)
 $ npm test
 ```
 
+## References:
+- [Mongoose official documentation](https://mongoosejs.com/docs/index.html )
+
+
 # TrainKoi Api Documentation 
 
 
 ## UserData API :
 
-1) Request for storing user data after signUp:
+1) Request for registering user data:
 ```
-POST   userDataApi/users  
+POST   userDataApi/users/register  
 ```
 ```
 Request JSON object: 
-
-    - _id(string): A unique user id.
-    - username(string):A name choosen by the user.
+    
     - email(string): User email.
+    - password(string) : User password.
+    - username(string):A name choosen by the user.
     - phone(string): User mobile number.
   
 Response JSON object:
@@ -157,14 +161,21 @@ Response JSON object:
 ```
 POST  locationTrackingApi/newLocationData
 ```
+Request JSON object:
+    - trainName(string): Name of the train.
+    - latitude(string): latitude value of the train.
+    - longitude(string): longitude value of the train.
+    - velocity(string): velocity of the queried train.
+    
+
 ```
 Response JSON object:
-
-               - trainName(string): Name of the queried train.
-               - latitude(string): latitude value of the train.
-               - longitude(string): longitude value of the train.
-               - velocity(string): velocity of the queried train.
-               - time(string): time of the last location update.
+    - _id(string): A unique train id.
+    - trainName(string): Name of the  train.
+    - latitude(string): latitude value of the train.
+    - longitude(string): longitude value of the train.
+    - velocity(string): velocity of the queried train.
+    - time(string): time of the last location update.
 
 ```
 ## Contact API:

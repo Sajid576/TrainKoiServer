@@ -1,7 +1,7 @@
 const railwayRouteBuilderRoute=require('./routeBuilderApi');
 const userDataRoute=require('./UserDataRoute');
 const transactionRoute=require('./TransactionApi');
-const locationTrackingRoute=require('./locationTrackingApi');
+const locationTrackingRoute=require('./TrainLocationRoute');
 const databaseBuilderRoute=require('./DatabaseBuilderApi');
 const contactApiRoute=require('./contactApiRoute');
 

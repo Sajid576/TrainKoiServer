@@ -1,24 +1,14 @@
 const dijkstra = require('../model/RouteBuilderModel/dijkstra');
 
 myDatabase=require('../model/DbModel/readData');
-locationData=require('../model/CrowdSourcingModel/TrainLocationData');
+//locationData=require('../model/CrowdSourcingModel/TrainLocationData');
 snapToRailway=require('../model/RouteBuilderModel/snapToRailway');
 timeEstimator=require('../model/TimeEstimatorModel/TimeEstimator');
 
-//Get request for drawing black lines on the google map
-drawRailwayTracksController =(req,res,next)=>{
 
-    console.log(new myDatabase.ReadData().fetchNodesToCoordinatesMap());
-    //converting map object to json object so that we can pass it to response
-    const nodesToCoordinatesJsonObj = Object.fromEntries(new myDatabase.ReadData().fetchNodesToCoordinatesMap());
-    res.status(200).json({
-        message:'Getting all the list of coordinates',
-        list:nodesToCoordinatesJsonObj,
-    })
-}
 
 //this GET request is for generating path on google map
-drawRouteController =(req,res,next)=>{
+let drawRouteController =(req,res,next)=>{
     console.log(req.params.trainName)
     console.log(req.params.startingStation)
     console.log(req.params.endingStation)
@@ -128,5 +118,5 @@ drawRouteController =(req,res,next)=>{
    
 }
 
-module.exports.drawRailwayTracksController=drawRailwayTracksController;
+
 module.exports.drawRouteController=drawRouteController;

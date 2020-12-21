@@ -3,9 +3,11 @@ const router  = express.Router();
 
 const userDataController=require('../controller/UserController');
 
+const validateRegister=require('../validator/signupValidator');
 
-//store user data
-router.post('/users',userDataController.storeUserDataController)
+
+//register user data
+router.post('/users/register',validateRegister,userDataController.registerUserDataController)
 
 //edit user data
 router.put('/users/edit',userDataController.editUserDataController)

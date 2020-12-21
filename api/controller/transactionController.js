@@ -1,5 +1,5 @@
 const UserModel = require('../model/DbModel/UserModel');
-const  mongoose =require('mongoose');
+
 
 //PUT: this method used to deduct the coin data of a particular user and send a response
 //to the user
