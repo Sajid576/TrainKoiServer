@@ -61,14 +61,28 @@ Response JSON object:
     - phone(string): User mobile number.
     - coins(Number): Total amount of coin of a particular user
 ```
+2) Request for user login:
+```
+POST  userDataApi/users/login
+```
+```
+Request JSON object:
+    - email(string): User email.
+    - password(string) : User password.
 
-2) Request for storing user data after edit:
+Response JSON object:
+    - token(string): A JWT token for the user.The protected routes require this token to recognize a authenticated user. The request url header must have key=Authorization and value=Bearer +'token'.
+    - success(Boolean): true
+
+```
+
+3) Request for storing user data after edit:
 ```
  PUT userDataApi/users/edit   
 ```
 ```
 Request JSON object:
-    - _id(string): A unique user id.
+    - email(string): email of the user
     - username(string):A name choosen by the user.
     - phone(string): User mobile number.
 
@@ -80,9 +94,9 @@ Response JSON object:
     - coins(Number): Total amount of coin of a particular user
 ```
 
-3) User data fetch:
+4) User data fetch:
 ```
-GET  userDataApi/users/read/(string:id)
+GET  userDataApi/users/read/(string:email)
 ```
 ```
 Response JSON object:

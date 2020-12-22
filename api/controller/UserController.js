@@ -1,6 +1,53 @@
 const UserModel = require('../model/DbModel/UserModel');
 const  mongoose =require('mongoose');
 const bcrypt=require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+//POST: user login
+exports.loginUserController=(req,res,next) => {
+    const email=req.body.email;
+    let password=req.body.password;
+    UserModel.findOne({email})
+    .then((user)=>{
+        if(user)
+        {
+            bcrypt.compare(password,user.password,(err,result)=>{
+                if(err)
+                {
+                    res.json(err);
+                }
+                if(result)
+                {
+                    console.log(process.env.JWT_SECRET);
+                    jwt.sign({user}, process.env.JWT_SECRET,{expiresIn:'2h'},(err,token)=>{
+                        if(err){
+                            console.log(err)
+                            return res.status(400).json({error: 'server error'})
+                        }
+                        
+                        res.status(200).json({token,success: true})
+                    })
+                   
+                }
+                else{
+                    res.status(200).json({
+                        message: "Password does not match"
+                    })
+                }
+            })
+        }
+        else
+        {
+            res.status(200).json({
+                message: "User not found"
+            })
+        }
+    })
+
+
+
+}
 
 //POST: register user data
 registerUserDataController =(req,res,next)=>{
@@ -40,11 +87,11 @@ registerUserDataController =(req,res,next)=>{
 
 //PUT: edit user data
 editUserDataController =(req,res,next)=>{
-    const uid=req.body.uid
+    const email=req.body.email;
     const username=req.body.username
     const phone=req.body.phone
    
-    UserModel.findOneAndUpdate({ _id:uid},{
+    UserModel.findOneAndUpdate({ email:email},{
         $set: {
             username:username,
             phone:phone
@@ -63,9 +110,9 @@ editUserDataController =(req,res,next)=>{
 
 //GET: read a particular user data
 readUserDataController =(req,res,next)=>{
-    const uid=req.params.id;
-    
-    UserModel.findById(uid)
+    const email=req.params.email;
+    console.log(email);
+    UserModel.findOne({email})
     .then((data)=>{
         res.status(200).json({
             data
