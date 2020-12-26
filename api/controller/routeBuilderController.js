@@ -8,7 +8,7 @@ const timeEstimator=require('../model/TimeEstimatorModel/TimeEstimator');
 
 
 //this GET request is for generating path on google map
-async let  drawRouteController =(req,res,next)=>{
+let drawRouteController =async (req,res,next)=>{
     console.log(req.params.trainName)
     console.log(req.params.startingStation)
     console.log(req.params.endingStation)
@@ -20,7 +20,7 @@ async let  drawRouteController =(req,res,next)=>{
     serviceNo=req.params.serviceNo;
 
     let trainData;
-    
+
     if(serviceNo=='2')
     {
         try {
