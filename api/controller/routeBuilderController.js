@@ -1,14 +1,14 @@
 const dijkstra = require('../model/RouteBuilderModel/dijkstra');
 
-myDatabase=require('../model/DbModel/FirebaseModel');
-//locationData=require('../model/CrowdSourcingModel/TrainLocationData');
-snapToRailway=require('../model/RouteBuilderModel/snapToRailway');
-timeEstimator=require('../model/TimeEstimatorModel/TimeEstimator');
+const myDatabase=require('../model/DbModel/FirebaseModel');
+const TrainLocationModel=require('../model/DbModel/TrainLocationModel');
+const snapToRailway=require('../model/RouteBuilderModel/snapToRailway');
+const timeEstimator=require('../model/TimeEstimatorModel/TimeEstimator');
 
 
 
 //this GET request is for generating path on google map
-let drawRouteController =(req,res,next)=>{
+async let  drawRouteController =(req,res,next)=>{
     console.log(req.params.trainName)
     console.log(req.params.startingStation)
     console.log(req.params.endingStation)
@@ -18,10 +18,20 @@ let drawRouteController =(req,res,next)=>{
     startingStation=req.params.startingStation;
     endingStation=req.params.endingStation;
     serviceNo=req.params.serviceNo;
+
+    let trainData;
+    
     if(serviceNo=='2')
     {
+        try {
+            trainData =await TrainLocationModel.findOne({trainName:trainName});
+        }catch(err)
+        {
+            res.json(err);
+        }
         
-        var trainData= locationData.fetchTrainLoction(trainName);
+            
+        
         var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
 
         var node1=preprocess.getNode1();
@@ -40,7 +50,12 @@ let drawRouteController =(req,res,next)=>{
     //route between train & starting station
     else if(serviceNo=='1')
     {
-        var trainData= locationData.fetchTrainLoction(trainName);
+        try {
+            trainData =await TrainLocationModel.findOne({trainName:trainName});
+        }catch(err)
+        {
+            res.json(err);
+        }
         
         var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
 
@@ -79,7 +94,12 @@ let drawRouteController =(req,res,next)=>{
     }
     //route between train & destination station
     else{
-        var trainData= locationData.fetchTrainLoction(trainName);
+        try {
+            trainData =await TrainLocationModel.findOne({trainName:trainName});
+        }catch(err)
+        {
+            res.json(err);
+        }
 
         var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
 
