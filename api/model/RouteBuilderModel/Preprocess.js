@@ -66,8 +66,8 @@ class Preprocess{
         var s2=CoordinateToStation.get(cord2);
 
         console.log(s1+","+s2+"---"+cord1+","+cord2);
-        this.node1=new myDb.ReadData().fetchstationToNode(s1);
-        this.node2=new myDb.ReadData().fetchstationToNode(s2);
+        this.node1= myDb.fetchstationToNode(s1);
+        this.node2= myDb.fetchstationToNode(s2);
 
     }
 

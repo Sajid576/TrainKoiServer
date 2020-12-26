@@ -1,7 +1,7 @@
-myDb=require('../DbModel/FirebaseModel');
-priorityqueue=require('./PriorityQueue');
-haversine=require('./Haversine');
-preprocess=require('./Preprocess');
+const myDb=require('../DbModel/FirebaseModel');
+const priorityqueue=require('./PriorityQueue');
+const haversine=require('./Haversine');
+const preprocess=require('./Preprocess');
 
 module.exports={
     nearestNodesFinder,
@@ -81,7 +81,7 @@ mergeLists=(flag,mainlist,upcomingList)=>
 function convertPathToCoordinateList(trainData,path,nearestList)
 {
     //console.log('convertPathToCoordinate called:  '+nearestList)
-    coordinatesMap=new myDb.ReadData().fetchNodesToCoordinatesMap();
+    let coordinatesMap= myDb.fetchNodesToCoordinatesMap();
 
     console.log("[0]: "+ nearestList[0]);
     console.log("[n-1]: "+nearestList[nearestList.length-1]);
@@ -128,7 +128,7 @@ function convertPathToCoordinateList(trainData,path,nearestList)
 // easily fetch their corresponding 3 lists from database
 function nearestNodesFinder(x,y)
 {
-    stationToCoordinate= new myDb.ReadData().fetchStationToCoordinate();
+    let stationToCoordinate = myDb.fetchStationToCoordinate();
     const Mp = new Map(Object.entries(stationToCoordinate));
 
     //this priority queue will keep track of nearest 3 nodes(station/junction)
@@ -173,10 +173,10 @@ function nearestNodesFinder(x,y)
     //console.log("station_junction_two:  "+station_junction_two);
     //console.log("station_junction_three:  "+station_junction_three);
 
-    node1=new myDb.ReadData().fetchstationToNode(station_junction_one);
-    node2=new myDb.ReadData().fetchstationToNode(station_junction_two);
-    node3=new myDb.ReadData().fetchstationToNode(station_junction_three);
-    node4=new myDb.ReadData().fetchstationToNode(station_junction_four);
+    node1= myDb.fetchstationToNode(station_junction_one);
+    node2= myDb.fetchstationToNode(station_junction_two);
+    node3= myDb.fetchstationToNode(station_junction_three);
+    node4= myDb.fetchstationToNode(station_junction_four);
 
     //console.log("node1:  "+node1+",node2:  "+node2+",node3:  "+node3+",node4:  "+node4);
     
@@ -200,7 +200,7 @@ function nearestNodesFinder(x,y)
 function nearestListIndexFinder(node_list,x,y)
 {
 
-    var nodeTocoord= new myDb.ReadData().fetchNodesToCoordinatesMap();
+    var nodeTocoord=  myDb.fetchNodesToCoordinatesMap();
 
     node1=node_list[0];
     node2=node_list[1];
