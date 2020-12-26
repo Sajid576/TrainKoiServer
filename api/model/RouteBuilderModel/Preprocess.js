@@ -61,9 +61,9 @@ class Preprocess{
     // Exception: it can throw null pointer if station/junction not found
     verifyNodePoint(cord1,cord2)
     {
-        var CoordinateToStation=new myDb.ReadData().fetchCoordinateToStation();
-        var s1=CoordinateToStation.get(cord1);
-        var s2=CoordinateToStation.get(cord2);
+        var CoordinateToStation= myDb.fetchCoordinateToStation();
+        var s1=CoordinateToStation[cord1];
+        var s2=CoordinateToStation[cord2];
 
         console.log(s1+","+s2+"---"+cord1+","+cord2);
         this.node1= myDb.fetchstationToNode(s1);
