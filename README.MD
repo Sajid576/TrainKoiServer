@@ -175,6 +175,7 @@ Response JSON object:
 ```
 POST  locationTrackingApi/newLocationData
 ```
+```
 Request JSON object:
     - trainName(string): Name of the train.
     - latitude(string): latitude value of the train.
@@ -182,7 +183,7 @@ Request JSON object:
     - velocity(string): velocity of the queried train.
     
 
-```
+
 Response JSON object:
     - _id(string): A unique train id.
     - trainName(string): Name of the  train.
@@ -192,6 +193,7 @@ Response JSON object:
     - time(string): time of the last location update.
 
 ```
+
 ## Contact API:
 1) used to send a contact data from client to server
 
@@ -214,9 +216,11 @@ Response JSON object:
     - subject(string): A subject of the contact
     - message(string): A message of the contact
     - createdAt(string): Date and time of creating contact
+```
 
 
 ## Database Builder API :
+
 1) Database builder request: (this request will be for building the database using the data of text files):
 ```
  POST databaseBuilderApi/buildDatabase   
