@@ -1,4 +1,4 @@
-myDb=require('../DbModel/readData');
+myDb=require('../DbModel/FirebaseModel');
 priorityqueue=require('./PriorityQueue');
 haversine=require('./Haversine');
 preprocess=require('./Preprocess');

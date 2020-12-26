@@ -5,6 +5,8 @@ let mongooseConnection= require('./api/model/DbModel/MongoDBConnection');
 mongooseConnection.connectMongoDB().then(()=>{
   console.log("Connected to the mongoose");
   if (cluster.isMaster) {
+    const fireModel= require('./api/model/DbModel/FirebaseModel');
+    fireModel.loadServerJson();
     // Count the machine's CPUs
     var cpuCount = require('os').cpus().length;
     console.log("There are "+cpuCount+" CPU core")

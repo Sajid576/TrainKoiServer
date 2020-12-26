@@ -1,6 +1,6 @@
 const dijkstra = require('../model/RouteBuilderModel/dijkstra');
 
-myDatabase=require('../model/DbModel/readData');
+myDatabase=require('../model/DbModel/FirebaseModel');
 //locationData=require('../model/CrowdSourcingModel/TrainLocationData');
 snapToRailway=require('../model/RouteBuilderModel/snapToRailway');
 timeEstimator=require('../model/TimeEstimatorModel/TimeEstimator');
