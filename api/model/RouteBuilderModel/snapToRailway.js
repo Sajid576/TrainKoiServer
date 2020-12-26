@@ -216,9 +216,9 @@ function nearestListIndexFinder(node_list,x,y)
          the closest to the train Coordinate .We are going to store that index in which NEAREST COORDINATE is located.
      */
     
-    var list1=nodeTocoord.get(key1);
-    var list2=nodeTocoord.get(key2);
-    var list3=nodeTocoord.get(key3);
+    var list1=nodeTocoord[key1];
+    var list2=nodeTocoord[key2];
+    var list3=nodeTocoord[key3];
 
     
     console.log("key1: "+key1+","+"key2: "+key2+"key3: "+key3);
