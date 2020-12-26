@@ -36,8 +36,8 @@ let drawRouteController =async (req,res,next)=>{
 
         var node1=preprocess.getNode1();
         var node2=preprocess.getNode2();
-        var station_junction_name1= new myDatabase.ReadData().fetchNodeTostation(node1);
-        var station_junction_name2= new myDatabase.ReadData().fetchNodeTostation(node2);
+        var station_junction_name1=  myDatabase.fetchNodeTostation(node1);
+        var station_junction_name2=  myDatabase.fetchNodeTostation(node2);
         var nearestStation_junction=  station_junction_name1+'-'+station_junction_name2;
 
         res.status(200).json({
@@ -59,9 +59,9 @@ let drawRouteController =async (req,res,next)=>{
         
         var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
 
-        destinationNode = new myDatabase.ReadData().fetchstationToNode(startingStation);       
+        destinationNode =  myDatabase.fetchstationToNode(startingStation);       
         
-        var graph = new dijkstra.Graph(new myDatabase.ReadData().fetchNodeTonodeDistance(),preprocess);
+        var graph = new dijkstra.Graph( myDatabase.fetchNodeTonodeDistance(),preprocess);
         graph.initDjikstraAlgorithm("0",destinationNode);
         total_dist=graph.getShortestDistance();
 
@@ -80,7 +80,7 @@ let drawRouteController =async (req,res,next)=>{
         }
         var estimatedTime=timeEstimator.estimateTime(Number(total_dist),Number(trainData['velocity']));
 
-        var destinationCordinate= new myDatabase.ReadData().convertStationToCoordinate(startingStation);
+        var destinationCordinate=  myDatabase.convertStationToCoordinate(startingStation);
 
         res.status(200).json({
             message:estimatedTime['msg'],
@@ -103,9 +103,9 @@ let drawRouteController =async (req,res,next)=>{
 
         var preprocess=snapToRailway.nearestNodesFinder(trainData['latitude'],trainData['longitude']);
 
-        destinationNode = new myDatabase.ReadData().fetchstationToNode(endingStation);       
+        destinationNode =  myDatabase.fetchstationToNode(endingStation);       
         
-        var graph = new dijkstra.Graph(new myDatabase.ReadData().fetchNodeTonodeDistance(),preprocess);
+        var graph = new dijkstra.Graph( myDatabase.fetchNodeTonodeDistance(),preprocess);
         graph.initDjikstraAlgorithm("0",destinationNode);
         total_dist=graph.getShortestDistance();
         path=graph.getShortestPath();
@@ -122,7 +122,7 @@ let drawRouteController =async (req,res,next)=>{
         }
         var estimatedTimeInfoObj=timeEstimator.estimateTime(Number(total_dist),Number(trainData['velocity']));
 
-        var destinationCordinate=new myDatabase.ReadData().convertStationToCoordinate(endingStation);
+        var destinationCordinate= myDatabase.convertStationToCoordinate(endingStation);
 
         res.status(200).json({
             message:estimatedTimeInfoObj['msg'],
