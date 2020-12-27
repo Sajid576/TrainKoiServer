@@ -82,6 +82,7 @@ function convertPathToCoordinateList(trainData,path,nearestList)
 {
     //console.log('convertPathToCoordinate called:  '+nearestList)
     let coordinatesMap= myDb.fetchNodesToCoordinatesMap();
+    coordinatesMap = new Map(Object.entries(coordinatesMap));
 
     console.log("[0]: "+ nearestList[0]);
     console.log("[n-1]: "+nearestList[nearestList.length-1]);
