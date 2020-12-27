@@ -21,14 +21,14 @@ class Graph{
         }
         console.log("initilizing with "+this.edges.size+" nodes so that I can work with max "+this.edges.size+"  nodes");
       
-        for (let [key, value] of nodeTonodeDistance) 
+        Object.entries(nodeTonodeDistance).forEach(([key,value]) =>  
         {
             var str=key.split(',');
             var start=str[0].trim();
             var end=str[1].trim();
             //console.log(start+','+end+'->'+value);
             this.setBidirectedAdjacent(start,end,value);   
-        }
+        });
 
         
 
