@@ -64,7 +64,7 @@ let drawRouteController =async (req,res,next)=>{
         var graph = new dijkstra.Graph( myDatabase.fetchNodeTonodeDistance(),preprocess);
         graph.initDjikstraAlgorithm("0",destinationNode);
         total_dist=graph.getShortestDistance();
-
+        console.log("Total distance: "+total_dist);
         path=graph.getShortestPath();
 
         if(path[1]==preprocess.getNode1())
@@ -109,7 +109,7 @@ let drawRouteController =async (req,res,next)=>{
         graph.initDjikstraAlgorithm("0",destinationNode);
         total_dist=graph.getShortestDistance();
         path=graph.getShortestPath();
-
+        console.log("Total distance: "+total_dist);
         if(path[1]==preprocess.getNode1())
         {
             total_dist+=preprocess.getFirstPortionDistance();
