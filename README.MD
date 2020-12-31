@@ -35,6 +35,7 @@ $ npm test
 
 ## References:
 - [Mongoose official documentation](https://mongoosejs.com/docs/index.html )
+- [Application video](https://www.youtube.com/watch?v=2TUDQuNiIDM&t=88s)
 
 
 # TrainKoi Api Documentation 
